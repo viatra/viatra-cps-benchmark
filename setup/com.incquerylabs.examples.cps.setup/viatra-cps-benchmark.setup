@@ -215,6 +215,7 @@
       option="-XX:MaxPermSize="
       value="256M"
       vm="true"/>
+  <stream name="master"/>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='com.github']"/>
