@@ -8,13 +8,13 @@
  * Contributors:
  *     Akos Horvath, Abel Hegedus, Zoltan Ujhelyi, Peter Lunk - initial API and implementation
  *******************************************************************************/
-module org.eclipse.viatra.examples.cps.integration.performance.eventdriven
+module com.incquerylabs.examples.cps.integration.performance.eventdriven
 
 import org.eclipse.viatra.integration.mwe2.*
 import org.eclipse.viatra.integration.mwe2.mwe2impl.*
-import org.eclipse.viatra.examples.cps.integration.performance.*
-import org.eclipse.viatra.examples.cps.integration.performance.batch.*
-import org.eclipse.viatra.examples.cps.integration.performance.eventdriven.*
+import com.incquerylabs.examples.cps.integration.performance.*
+import com.incquerylabs.examples.cps.integration.performance.batch.*
+import com.incquerylabs.examples.cps.integration.performance.eventdriven.*
 import org.eclipse.viatra.examples.cps.integration.messages.*
 import org.eclipse.viatra.examples.cps.integration.*
 
