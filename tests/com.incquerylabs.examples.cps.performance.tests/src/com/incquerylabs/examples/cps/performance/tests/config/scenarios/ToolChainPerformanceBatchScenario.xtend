@@ -18,6 +18,7 @@ import com.incquerylabs.examples.cps.performance.tests.config.phases.EmptyPhase
 import com.incquerylabs.examples.cps.performance.tests.config.phases.InitializationPhase
 import com.incquerylabs.examples.cps.performance.tests.config.phases.M2MTransformationPhase
 import com.incquerylabs.examples.cps.performance.tests.config.phases.M2TTransformationPhase
+import eu.mondo.sam.core.phases.IterationPhase
 
 /*
  * Scenario for given model statistics
@@ -30,6 +31,15 @@ class ToolChainPerformanceBatchScenario extends CPSBenchmarkScenario {
 	override build() {
 		
 		val seq = new SequencePhase
+		val innerSeq = new SequencePhase
+		innerSeq.addPhases(
+			benchmarkCase.getModificationPhase("Modification"),
+			new M2MTransformationPhase("M2MTransformation2"),
+			new M2TTransformationPhase("M2TTransformation2")
+		)
+
+		val iter = new IterationPhase(5)
+		iter.phase = innerSeq
 		seq.addPhases(
 			new EMFResourceInitializationPhase("EMFResourceInitialization"),
 			benchmarkCase.getGenerationPhase("Generation"),
@@ -37,9 +47,7 @@ class ToolChainPerformanceBatchScenario extends CPSBenchmarkScenario {
 			new M2MTransformationPhase("M2MTransformation1"),
 			new M2TTransformationPhase("M2TTransformation1"),
 			new EmptyPhase("ChangeMonitorInitialization"),
-			benchmarkCase.getModificationPhase("Modification"),
-			new M2MTransformationPhase("M2MTransformation2"),
-			new M2TTransformationPhase("M2TTransformation2")
+			iter
 		)
 		rootPhase = seq
 	}

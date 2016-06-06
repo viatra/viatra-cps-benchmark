@@ -34,7 +34,7 @@ class BasicXformScenario extends CPSBenchmarkScenario {
 			new M2MTransformationPhase("Transformation")
 		)
 
-		val iter = new IterationPhase(2)
+		val iter = new IterationPhase(5)
 		iter.phase = innerSeq
 
 		seq.addPhases(
