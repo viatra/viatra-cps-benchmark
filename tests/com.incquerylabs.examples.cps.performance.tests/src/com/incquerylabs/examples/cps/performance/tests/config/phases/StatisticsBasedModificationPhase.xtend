@@ -36,7 +36,8 @@ class StatisticsBasedModificationPhase extends AtomicPhase{
 		modificationTimer.startMeasure
 		val appType = cpsToken.cps2dep.cps.appTypes.findFirst[it.identifier.contains("AC_withStateMachine")]
 		val hostInstance = cpsToken.cps2dep.cps.hostTypes.findFirst[it.identifier.contains("HC_appContainer")].instances.head
-		appType.prepareApplicationInstanceWithId("new.app.instance", hostInstance)
+		val appID = "new.app.instance" + cpsToken.nextModificationIndex 
+		appType.prepareApplicationInstanceWithId(appID, hostInstance)
 		modificationTimer.stopMeasure
 		modificationMemory.measure
 		

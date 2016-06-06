@@ -46,6 +46,10 @@ class CPSDataToken implements DataToken{
 		
 	}
 	
-	
+	def getNextModificationIndex() {
+		val index = modificationIndex
+		modificationIndex++
+		return index
+	}
 	
 }
