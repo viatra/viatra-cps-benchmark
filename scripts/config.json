@@ -1,0 +1,24 @@
+{
+  "Plot": [
+    {
+      "X_Dimension": "Size",
+      "Legend": "PhaseName",
+      "Summarize_Function": [
+        "Transformation"
+      ],
+      "Title": "SCENARIO CASENAME TOOL SIZE",
+      "Metrics": [
+        "Time"
+      ],
+      "Metric_Scale": -6,
+      "Min_Iteration": 1,
+      "Max_Iteration": -1,
+      "Y_Label": "Time (ms)",
+      "X_Axis_Scale": "factor",
+      "Y_Axis_Scale": "log2",
+      "Extensions": [
+        "png"
+      ]
+    }
+  ]
+}

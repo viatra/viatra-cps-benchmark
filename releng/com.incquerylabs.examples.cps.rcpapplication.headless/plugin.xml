@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="com.incquerylabs.examples.cps.rcpapplication.headless.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="com_incquerylabs_examples_cps_rcpapplication_headless"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.incquerylabs.examples.cps.rcpapplication.headless.application"
+            name="Headless Testing App">
+         <property
+               name="appName"
+               value="Headless Testing App">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

@@ -1,0 +1,6 @@
+StatisticsBasedScenario;;;
+Model scale;Eobjects;Ereferences;Total generation time (ms)
+1;390;789;730
+8;3613;17341;3627
+16;7831;89636;7254
+32;17732;595057;58757

@@ -1,0 +1,42 @@
+{
+  "Plot": [
+    {
+      "X_Dimension": "Size",
+      "Legend": "Tool",
+      "Legend_Filters": ["ViatraTransformation-TEMPLATE", "QueryResultTraceability-TEMPLATE", "PartialBatch-TEMPLATE", "ExplicitTraceability-TEMPLATE", "BatchViatra-TEMPLATE", "BatchSimple-TEMPLATE", "BatchOptimized-TEMPLATE", "BatchIncQuery-TEMPLATE"],
+      "Summarize_Function": ["Initialization", "M2MTransformation1", "M2TTransformation1"],
+      "Metrics": [
+        "Time"
+      ],
+      "Min_Iteration": null,
+      "Max_Iteration": null,
+      "Title": "",
+      "Metric_Scale": -6,
+      "X_Label": "",
+      "Y_Label": "",
+      "X_Axis_Scale": "log2",
+      "Y_Axis_Scale": "log2",
+      "Show_Values": false,
+      "Draw_Lines": true,
+      "Legend_Position": "right",
+      "Legend_Direction": "vertical",
+      "Theme": "sam",
+      "Point_Size": 4,
+      "Line_Size": 1,
+      "Text_Size": 16,
+      "Text_Font": "Helvetica",
+      "X_Text_Size": 13,
+      "Y_Text_Size": 13,
+      "X_Axis_Horizontal_Justice": 0.5,
+      "X_Axis_Vertical_Justice": 0,
+      "Y_Axis_Horizontal_Justice": 1,
+      "Y_Axis_Vertical_Justice": 0.5,
+      "Extension": "PDF",
+      "Automatic_Filename": true,
+      "Specified_Filename": null,
+      "Diagram_Width": 14,
+      "Diagram_Height": 7,
+      "Diagram_DPI": 300
+    }
+  ]
+}
