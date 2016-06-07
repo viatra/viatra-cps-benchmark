@@ -99,7 +99,7 @@
     <repository
         url="http://download.eclipse.org/viatra/updates/integration"/>
     <repository
-        url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/"/>
+        url="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.10.0"/>
   </setupTask>
   <setupTask
       xsi:type="setup.targlets:TargletTask">
@@ -129,7 +129,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:EclipseIniTask"
-      option="-Doomph.redirection.viatra.cps.demo.setup"
+      option="-Doomph.redirection.cps.benchmark.setup"
       value="=https://raw.githubusercontent.com/IncQueryLabs/viatra-cps-benchmark/master/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup->${git.clone.cps.benchmark.location|uri}/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup"
       vm="true"/>
   <setupTask
