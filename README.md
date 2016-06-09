@@ -17,7 +17,7 @@ You can use [Oomph](https://www.eclipse.org/oomph) to deploy a ready to go Eclip
 
 1. Start the [Oomph installer](https://wiki.eclipse.org/Eclipse_Oomph_Installer), select the Eclipse product and the product version.
 1. Use the **Add a project to the user project of the selected catalog** option to provide the setup file with the following URL: https://git.eclipse.org/c/viatra/org.eclipse.viatra.examples.git/plain/cps/releng/org.eclipse.viatra.examples.cps.setup/CPSExample.setup
-1. Add the benchmark setup URL as well: https://raw.githubusercontent.com/IncQueryLabs/viatra-cps-benchmark/master/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup
+1. Add the benchmark setup URL as well: https://raw.githubusercontent.com/viatra/viatra-cps-benchmark/master/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup
 1. Check the `VIATRA CPS Demo` and `CPS Benchmark` projects
 
 Read the [Oomph help](http://download.eclipse.org/oomph/help/org.eclipse.oomph.setup.doc/html/user/wizard/index.html) if you are lost in the wizard's forest.
