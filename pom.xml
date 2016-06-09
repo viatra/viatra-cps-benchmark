@@ -7,12 +7,16 @@
 	<artifactId>com.incquerylabs.examples.cps.benchmark.parent</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<name>CPS Demonstrator Benchmark</name>
-	<url></url>
+	<url>https://github.com/viatra/viatra-cps-benchmark</url>
 	<packaging>pom</packaging>
 	<modules>
+		<module>mondo-sam/eu.mondo.sam.core</module>
+
 		<!-- target platform -->
 		<module>releng/org.eclipse.viatra.examples.cps.target</module>
-
+		
+		<module>tests/org.eclipse.incquery.examples.cps.performance.tests</module>
+		
 		<module>releng/com.incquerylabs.examples.cps.rcpapplication.headless.product</module>
 		<module>releng/com.incquerylabs.examples.cps.rcpapplication.headless</module>
 	</modules>
@@ -53,11 +57,13 @@
 						</artifact>
 					</target> -->
 					<environments>
+						<!-- 
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
+						 -->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
