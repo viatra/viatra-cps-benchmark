@@ -13,6 +13,7 @@
 		<!-- target platform -->
 		<module>releng/com.incquerylabs.examples.cps.target</module>
 		
+		<module>dependencies/eu.mondo.sam.bundle</module>
 		<module>tests/com.incquerylabs.examples.cps.performance.tests</module>
 		
 		<module>releng/com.incquerylabs.examples.cps.rcpapplication.headless.product</module>

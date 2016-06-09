@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MONDO-SAM OSGI Bundle
+Bundle-SymbolicName: eu.mondo.sam.bundle
+Bundle-Version: 0.1.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: com.google.guava;bundle-version="15.0.0",
+ org.codehaus.jackson.core;bundle-version="1.6.0",
+ org.codehaus.jackson.mapper;bundle-version="1.6.0"
+Bundle-ClassPath: lib/eu.mondo.sam.core-0.1.0.jar
+Export-Package: eu.mondo.sam.core,
+ eu.mondo.sam.core.metrics,
+ eu.mondo.sam.core.phases,
+ eu.mondo.sam.core.phases.iterators,
+ eu.mondo.sam.core.results,
+ eu.mondo.sam.core.scenarios

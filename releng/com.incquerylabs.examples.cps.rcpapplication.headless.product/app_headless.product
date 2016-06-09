@@ -33,7 +33,7 @@
       <plugin id="com.ibm.icu"/>
       <plugin id="com.incquerylabs.examples.cps.performance.tests"/>
       <plugin id="com.incquerylabs.examples.cps.rcpapplication.headless"/>
-      <plugin id="eu.mondo.sam.core"/>
+      <plugin id="eu.mondo.sam.bundle"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.xml"/>
       <plugin id="org.antlr.runtime" version="3.2.0.v201101311130"/>
@@ -54,7 +54,10 @@
       <plugin id="org.eclipse.core.resources.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
-      <plugin id="org.eclipse.emf.cdo.ecore.retrofit" fragment="true"/>
+      <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.debug.core"/>
+      <plugin id="org.eclipse.emf.codegen"/>
+      <plugin id="org.eclipse.emf.codegen.ecore"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
@@ -63,21 +66,19 @@
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.region" fragment="true"/>
       <plugin id="org.eclipse.equinox.registry"/>
-      <plugin id="org.eclipse.incquery.runtime"/>
-      <plugin id="org.eclipse.incquery.runtime.base"/>
-      <plugin id="org.eclipse.incquery.runtime.base.itc"/>
-      <plugin id="org.eclipse.incquery.runtime.evm"/>
-      <plugin id="org.eclipse.incquery.runtime.matchers"/>
-      <plugin id="org.eclipse.incquery.runtime.rete"/>
-      <plugin id="org.eclipse.incquery.runtime.rete.recipes"/>
+      <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
       <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
       <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
       <plugin id="org.eclipse.jdt.core"/>
+      <plugin id="org.eclipse.jdt.debug"/>
+      <plugin id="org.eclipse.jdt.launching"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.text"/>
-      <plugin id="org.eclipse.viatra.emf.runtime"/>
+      <plugin id="org.eclipse.viatra.addon.querybasedfeatures.runtime"/>
       <plugin id="org.eclipse.viatra.examples.cps.deployment"/>
       <plugin id="org.eclipse.viatra.examples.cps.generator"/>
       <plugin id="org.eclipse.viatra.examples.cps.generator.tests"/>
@@ -85,6 +86,9 @@
       <plugin id="org.eclipse.viatra.examples.cps.planexecutor"/>
       <plugin id="org.eclipse.viatra.examples.cps.queries"/>
       <plugin id="org.eclipse.viatra.examples.cps.tests"/>
+      <plugin id="org.eclipse.viatra.examples.cps.tests.instances"/>
+      <plugin id="org.eclipse.viatra.examples.cps.tests.queries"/>
+      <plugin id="org.eclipse.viatra.examples.cps.tests.util"/>
       <plugin id="org.eclipse.viatra.examples.cps.traceability"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.batch.eiq"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.batch.optimized"/>
@@ -101,12 +105,28 @@
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2t.jdt"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.serializer"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.serializer.eclipse"/>
+      <plugin id="org.eclipse.viatra.examples.cps.xform.serializer.javaio"/>
+      <plugin id="org.eclipse.viatra.query.patternlanguage"/>
+      <plugin id="org.eclipse.viatra.query.patternlanguage.emf"/>
+      <plugin id="org.eclipse.viatra.query.runtime"/>
+      <plugin id="org.eclipse.viatra.query.runtime.base"/>
+      <plugin id="org.eclipse.viatra.query.runtime.base.itc"/>
+      <plugin id="org.eclipse.viatra.query.runtime.localsearch"/>
+      <plugin id="org.eclipse.viatra.query.runtime.matchers"/>
+      <plugin id="org.eclipse.viatra.query.runtime.rete"/>
+      <plugin id="org.eclipse.viatra.query.runtime.rete.recipes"/>
+      <plugin id="org.eclipse.viatra.query.testing.core"/>
+      <plugin id="org.eclipse.viatra.query.testing.snapshot"/>
+      <plugin id="org.eclipse.viatra.transformation.evm"/>
+      <plugin id="org.eclipse.viatra.transformation.runtime.emf"/>
       <plugin id="org.eclipse.xtend"/>
       <plugin id="org.eclipse.xtend.core"/>
       <plugin id="org.eclipse.xtend.lib"/>
       <plugin id="org.eclipse.xtend.lib.macro"/>
       <plugin id="org.eclipse.xtext"/>
+      <plugin id="org.eclipse.xtext.builder.standalone"/>
       <plugin id="org.eclipse.xtext.common.types"/>
+      <plugin id="org.eclipse.xtext.junit4"/>
       <plugin id="org.eclipse.xtext.logging" fragment="true"/>
       <plugin id="org.eclipse.xtext.smap"/>
       <plugin id="org.eclipse.xtext.util"/>
