@@ -10,8 +10,6 @@
 	<url>https://github.com/viatra/viatra-cps-benchmark</url>
 	<packaging>pom</packaging>
 	<modules>
-		<module>mondo-sam/eu.mondo.sam.core</module>
-
 		<!-- target platform -->
 		<module>releng/com.incquerylabs.examples.cps.target</module>
 		
