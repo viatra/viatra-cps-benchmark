@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Headless Test App
 Bundle-SymbolicName: com.incquerylabs.examples.cps.rcpapplication.headless;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: IncQueryLabs Inc.
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,
