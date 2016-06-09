@@ -48,14 +48,14 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<!--<target>
+					<target>
 						<artifact>
-							<groupId>org.eclipse.viatra.examples.cps</groupId>
-							<artifactId>org.eclipse.viatra.examples.cps.target</artifactId>
+							<groupId>com.incquerylabs.examples.cps</groupId>
+							<artifactId>com.incquerylabs.examples.cps.target</artifactId>
 							<version>${project.version}</version>
-							<relativePath>releng/org.eclipse.viatra.examples.cps.target/pom.xml</relativePath>
+							<relativePath>releng/com.incquerylabs.examples.cps.target/pom.xml</relativePath>
 						</artifact>
-					</target> -->
+					</target>
 					<environments>
 						<!-- 
 						<environment>
