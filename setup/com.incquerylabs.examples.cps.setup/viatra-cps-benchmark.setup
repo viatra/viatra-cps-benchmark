@@ -46,7 +46,7 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.cps.benchmark"
-      remoteURI="IncQueryLabs/viatra-cps-benchmark">
+      remoteURI="viatra/viatra-cps-benchmark">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
       <detail
@@ -149,7 +149,7 @@
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Doomph.redirection.cps.benchmark.setup"
-      value="=https://raw.githubusercontent.com/IncQueryLabs/viatra-cps-benchmark/master/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup->${git.clone.cps.benchmark.location|uri}/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup"
+      value="=https://raw.githubusercontent.com/viatra/viatra-cps-benchmark/master/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup->${git.clone.cps.benchmark.location|uri}/setup/com.incquerylabs.examples.cps.setup/viatra-cps-benchmark.setup"
       vm="true"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
