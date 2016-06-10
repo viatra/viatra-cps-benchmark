@@ -30,7 +30,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PDF"
+      "Extension": "PDF",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -67,7 +67,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PDF"
+      "Extension": "PDF",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -104,7 +104,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PDF"
+      "Extension": "PDF",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -141,7 +141,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PDF"
+      "Extension": "PDF",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -179,7 +179,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PDF"
+      "Extension": "PDF",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -216,7 +216,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PNG"
+      "Extension": "PNG",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -253,7 +253,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PNG"
+      "Extension": "PNG",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -290,7 +290,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PNG"
+      "Extension": "PNG",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -327,7 +327,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PNG"
+      "Extension": "PNG",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
@@ -365,7 +365,7 @@
       "X_Axis_Vertical_Justice": 0,
       "Y_Axis_Horizontal_Justice": 1,
       "Y_Axis_Vertical_Justice": 0.5,
-      "Extension": "PNG"
+      "Extension": "PNG",
       "Automatic_Filename": true,
       "Specified_Filename": null,
       "Diagram_Width": 14,
