@@ -12,5 +12,7 @@ cp scripts/report.sh benchmark
 
 cd benchmark
 python3 run_linux.py
+chmod +x convert_results.sh
 ./convert_results.sh
+chmod +x report.sh
 ./report.sh
