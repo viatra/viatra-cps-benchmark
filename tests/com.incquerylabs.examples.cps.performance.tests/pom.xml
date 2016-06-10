@@ -9,7 +9,7 @@
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <artifactId>com.incquerylabs.examples.cps.performance.tests</artifactId>
-  <packaging>eclipse-plugin</packaging>
+  <packaging>eclipse-test-plugin</packaging>
   <build>
 		<plugins>
 			<plugin>

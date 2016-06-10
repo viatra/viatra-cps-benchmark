@@ -94,7 +94,6 @@
 						<exclude>**/queries/*.java</exclude>
 		            </excludes>
 		            <failIfNoTests>false</failIfNoTests>
-		            <skipTests>false</skipTests>
 				</configuration>
 				<!-- <executions>
 		         <execution>
