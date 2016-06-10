@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Headless Testing App" id="com.incquerylabs.examples.cps.rcpapplication.headless.com_incquerylabs_examples_cps_rcpapplication_headless" application="com.incquerylabs.examples.cps.rcpapplication.headless.application" useFeatures="false" includeLaunchers="true">
+<product name="CPS Benchmark Application" uid="com.incquerylabs.examples.cps.benchmark.app" id="com.incquerylabs.examples.cps.rcpapplication.headless.com_incquerylabs_examples_cps_rcpapplication_headless" application="com.incquerylabs.examples.cps.rcpapplication.headless.application" version="0.1.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
