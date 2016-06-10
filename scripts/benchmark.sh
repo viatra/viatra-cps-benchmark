@@ -16,4 +16,3 @@ chmod +x convert_results.sh
 ./convert_results.sh
 chmod +x report.sh
 mkdir diagrams
-./report.sh
