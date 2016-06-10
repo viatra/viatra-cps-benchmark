@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$( cd "$( dirname "$0" )" && pwd )"
 
-python3 ../mondo-sam/reporting/convert_results.py --source benchmark/results/json/ \
---jsonfile benchmark/results.json \
---csvfile benchmark/results/results.csv
+python3 ${WORKSPACE}/mondo-sam/reporting/convert_results.py --source ${WORKSPACE}/benchmark/results/json/ \
+--jsonfile ${WORKSPACE}/benchmark/results/results.json \
+--csvfile ${WORKSPACE}/benchmark/results/results.csv

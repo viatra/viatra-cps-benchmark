@@ -15,5 +15,5 @@ python3 run_linux.py
 chmod +x convert_results.sh
 ./convert_results.sh
 chmod +x report.sh
-mkdir benchmark/diagrams
+mkdir diagrams
 ./report.sh
