@@ -23,7 +23,7 @@ CONST_TIMEOUT=1000
 """
 RUNS determines how many times the same test is run
 """
-CONST_RUNS=1
+CONST_RUNS=5
 
 """
 Valid values for TRANSFORMATOR_TYPES:
@@ -54,8 +54,8 @@ TRANSFORMATOR_TYPES=[
 """
 SCALES are integers
 """
-#SCALES=[1,2,4,8,16,32,64]
-SCALES=[1,2]
+SCALES=[1,2,4,8,16,32,64]
+#SCALES=[1,2]
 
 
 """
