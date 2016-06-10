@@ -9,6 +9,6 @@ cp scripts/run_linux.py benchmark
 cp scripts/convert_results.sh benchmark
 
 cd benchmark
-python3 run_linux.py
+python3 -u run_linux.py
 chmod +x convert_results.sh
 ./convert_results.sh
