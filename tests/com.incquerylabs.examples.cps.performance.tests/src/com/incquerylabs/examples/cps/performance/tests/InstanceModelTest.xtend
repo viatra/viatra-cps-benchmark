@@ -41,7 +41,7 @@ class InstanceModelTest extends CPS2DepTest {
 		endTest(testId)
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test
 	def generatedDemoModel(){
 		val testId = "generatedDemoModel"
@@ -65,7 +65,7 @@ class InstanceModelTest extends CPS2DepTest {
 		endTest(testId)
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test
 	def generatedBigModel(){
 		val testId = "generatedBigModel"
