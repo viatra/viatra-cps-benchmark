@@ -31,17 +31,17 @@ class BasicXformScenario extends CPSBenchmarkScenario {
 		val innerSeq = new SequencePhase
 		innerSeq.addPhases(
 			benchmarkCase.getModificationPhase("Modification"),
-			new M2MTransformationPhase("Transformation")
+			new M2MTransformationPhase("M2MTransformation2")
 		)
 
 		val iter = new IterationPhase(5)
 		iter.phase = innerSeq
 
 		seq.addPhases(
-			new EMFResourceInitializationPhase("ResourceInitialization"),
+			new EMFResourceInitializationPhase("EMFResourceInitialization"),
 			benchmarkCase.getGenerationPhase("Generation"),
 			new InitializationPhase("Initialization"),
-			new M2MTransformationPhase("Transformation"),
+			new M2MTransformationPhase("M2MTransformation1"),
 			iter
 		)
 		rootPhase = seq
