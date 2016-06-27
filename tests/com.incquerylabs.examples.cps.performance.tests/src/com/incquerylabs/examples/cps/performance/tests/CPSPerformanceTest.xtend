@@ -28,6 +28,8 @@ import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import eu.mondo.sam.core.metrics.TimeMetric
+import eu.mondo.sam.core.metrics.MemoryMetric
 
 @RunWith(Parameterized)
 abstract class CPSPerformanceTest extends CPSTestBase {
@@ -110,6 +112,7 @@ abstract class CPSPerformanceTest extends CPSTestBase {
 		
 		val engine = new BenchmarkEngine
 		JsonSerializer::setResultPath(jsonResultFolder)
+		MemoryMetric.numberOfGC = 5
 		
 		engine.runBenchmark(scenario, token)
 

@@ -31,6 +31,8 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.xform.serializer.IFileAccessor
 import java.io.File
+import org.eclipse.core.internal.resources.Workspace
+import org.eclipse.core.resources.IWorkspaceDescription
 
 class M2TTransformationPhase extends AtomicPhase {
 	extension DefaultSerializer serializer = new DefaultSerializer
@@ -87,6 +89,12 @@ class M2TTransformationPhase extends AtomicPhase {
 		val fileAccessor = new EclipseBasedFileAccessor
 		createProject("",projectName, fileAccessor)
 		val project = ResourcesPlugin.workspace.root.getProject(projectName)
+		
+		// disable autobuilding of workspace
+		val description = ResourcesPlugin.getWorkspace().getDescription();
+        description.setAutoBuilding(false);
+        ResourcesPlugin.getWorkspace().setDescription(description);
+        
 		val srcFolder = project.getFolder("src");
 		val folderString = srcFolder.location.toOSString
 		cpsToken.srcFolder = srcFolder

@@ -45,6 +45,7 @@ class Application implements IApplication {
 			scale = Integer.parseInt(args.get(1))
 			generatorType = GeneratorType.valueOf(args.get(2))
 			runIndex = Integer.parseInt(args.get(3))
+			
 			initLogger(trafoType, generatorType, scale)
 			
 			info('''
@@ -71,6 +72,8 @@ class Application implements IApplication {
 			runTest(trafoType, 1, generatorType, warmupFolderPath, runIndex)
 			runTest(trafoType, scale, generatorType, resultsFolderPath, runIndex)
 			
+		} catch (IllegalArgumentException ex){
+			ex.printStackTrace
 		} catch (Exception ex) {
 			info(ex.message)
 		}

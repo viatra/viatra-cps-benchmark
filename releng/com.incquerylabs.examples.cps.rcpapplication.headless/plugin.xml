@@ -16,10 +16,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.incquerylabs.examples.cps.rcpapplication.headless.application"
-            name="Headless Testing App">
+            name="CPS Benchmark Application">
          <property
                name="appName"
-               value="Headless Testing App">
+               value="CPS Benchmark Application">
          </property>
       </product>
    </extension>
