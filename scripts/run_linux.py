@@ -23,7 +23,7 @@ CONST_TIMEOUT=1000
 """
 RUNS determines how many times the same test is run
 """
-CONST_RUNS=5
+CONST_RUNS=1
 
 """
 Valid values for TRANSFORMATOR_TYPES:
