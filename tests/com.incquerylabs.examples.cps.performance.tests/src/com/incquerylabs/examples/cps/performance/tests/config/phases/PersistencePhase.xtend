@@ -11,13 +11,10 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
+import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
 import eu.mondo.sam.core.phases.OptionalPhase
-import eu.mondo.sam.core.results.PhaseResult
-import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import org.eclipse.viatra.examples.cps.tests.util.PropertiesUtil
 
 class PersistencePhase extends OptionalPhase{
@@ -32,22 +29,21 @@ class PersistencePhase extends OptionalPhase{
 }
 
 
-class PersistenceAtomicPhase extends AtomicPhase{
+class PersistenceAtomicPhase extends CPSBenchmarkPhase{
 	
 	new(String name) {
-		super(name)
+		super(name, true)
 	}
 	
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val persistenceTimer = new TimeMetric("Time")
-		val persistenceMemory = new MemoryMetric("Memory")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
-		persistenceTimer.startMeasure
+		timer.startMeasure
+		
 		cpsToken.cps2dep.eResource.resourceSet.resources.forEach[save(null)]
-		persistenceTimer.stopMeasure
-		persistenceMemory.measure
-		phaseResult.addMetrics(persistenceTimer, persistenceMemory)
+		
+		timer.stopMeasure
+		memory.measure
+		return emptySet
 	}
 	
 	

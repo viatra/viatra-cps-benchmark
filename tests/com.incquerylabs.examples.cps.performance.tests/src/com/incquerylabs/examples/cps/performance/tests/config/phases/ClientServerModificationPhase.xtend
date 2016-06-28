@@ -11,39 +11,37 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
-import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
-import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
+import eu.mondo.sam.core.metrics.MemoryMetric
+import eu.mondo.sam.core.metrics.TimeMetric
+import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil
 
-class ClientServerModificationPhase extends AtomicPhase{
+class ClientServerModificationPhase extends CPSBenchmarkPhase{
 	
 	extension CPSModelBuilderUtil builderUtil
 	
 	new(String name) {
-		super(name)
+		super(name, false)
 		builderUtil = new CPSModelBuilderUtil
 	}
 	
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val modifyTimer = new TimeMetric("Modify Time")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		val editTimer = new TimeMetric("Edit Time")
 		
 //		info("Adding new host instance")
-		modifyTimer.startMeasure
+		timer.startMeasure
+		
 		val appType = cpsToken.cps2dep.cps.appTypes.findFirst[it.identifier.contains("Client")]
 		val hostInstance = cpsToken.cps2dep.cps.hostTypes.findFirst[it.identifier.contains("client")].instances.head
 		
 		editTimer.startMeasure
+		
 		val appID = "new.app.instance" + cpsToken.nextModificationIndex 
 		appType.prepareApplicationInstanceWithId(appID, hostInstance)
-		editTimer.stopMeasure
-		modifyTimer.stopMeasure
 		
-		phaseResult.addMetrics(editTimer, modifyTimer)
+		editTimer.stopMeasure
+		timer.stopMeasure
+		return #{editTimer}
 	}
 	
 }

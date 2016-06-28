@@ -11,52 +11,46 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
+import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
 import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput
 import org.eclipse.viatra.examples.cps.generator.interfaces.ICPSConstraints
 import org.eclipse.viatra.examples.cps.generator.queries.Validation
 import org.eclipse.viatra.examples.cps.generator.utils.StatsUtil
-import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor
 
-class GenerationPhase extends AtomicPhase{
+class GenerationPhase extends CPSBenchmarkPhase {
 	
 	ICPSConstraints constraints
 	
 	new(String name, ICPSConstraints constraints) {
-		super(name)
+		super(name, true)
 		this.constraints = constraints
 	}
 	
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val generatorTimer = new TimeMetric("Time")
-		val generatorMemory = new MemoryMetric("Memory")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 
 		val CPSGeneratorInput input = new CPSGeneratorInput(cpsToken.seed, constraints, cpsToken.cps2dep.cps);
 		var plan = getPlan();
-		
 		var PlanExecutor<CPSFragment, CPSGeneratorInput> generator = new PlanExecutor();
 		
-		// Generating
-		generatorTimer.startMeasure
-		var fragment = generator.process(plan, input);
-		generatorTimer.stopMeasure
-		generatorMemory.measure
+		timer.startMeasure
 		
+		// Generating
+		var fragment = generator.process(plan, input);
+		
+		timer.stopMeasure
+		memory.measure
 		
 		Validation.instance.prepare(fragment.engine);
 		val cpsStats = StatsUtil.generateStatsForCPS(fragment.engine, fragment.modelRoot)
 		cpsStats.log
 		fragment.engine.dispose
 		
-		phaseResult.addMetrics(generatorTimer, generatorMemory)
+		return emptySet
 	}
 	
 	protected def getPlan() {

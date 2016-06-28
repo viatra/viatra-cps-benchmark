@@ -8,32 +8,26 @@
  * Contributors:
  *   Akos Horvath, Abel Hegedus, Tamas Borbas, Marton Bur, Zoltan Ujhelyi, Daniel Segesdi, Zsolt Kovari - initial API and implementation
  *******************************************************************************/
-
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
-import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
-import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
-import org.eclipse.viatra.query.runtime.emf.EMFScope
+import eu.mondo.sam.core.metrics.MemoryMetric
+import eu.mondo.sam.core.metrics.TimeMetric
 
-class InitializationPhase extends AtomicPhase{
+class InitializationPhase extends CPSBenchmarkPhase {
 	
 	new(String name) {
-		super(name)
+		super(name, false)
 	}
 	
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val transformInitTimer = new TimeMetric("Time")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
-		transformInitTimer.startMeasure
+		timer.startMeasure
+		
 		cpsToken.xform.initializeTransformation(cpsToken.cps2dep)
-		transformInitTimer.stopMeasure
 		
-		phaseResult.addMetrics(transformInitTimer)
+		timer.stopMeasure
+		return emptySet
 	}
 	
 }

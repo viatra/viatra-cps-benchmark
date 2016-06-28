@@ -11,40 +11,32 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
-import eu.mondo.sam.core.metrics.MemoryMetric
-import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.runtime.NullProgressMonitor
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
+import eu.mondo.sam.core.metrics.MemoryMetric
+import eu.mondo.sam.core.metrics.TimeMetric
+import java.io.File
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.xform.m2t.api.DefaultM2TOutputProvider
 import org.eclipse.viatra.examples.cps.xform.m2t.api.ICPSGenerator
 import org.eclipse.viatra.examples.cps.xform.m2t.jdt.CodeGenerator
 import org.eclipse.viatra.examples.cps.xform.serializer.DefaultSerializer
+import org.eclipse.viatra.examples.cps.xform.serializer.IFileAccessor
 import org.eclipse.viatra.examples.cps.xform.serializer.eclipse.EclipseBasedFileAccessor
 import org.eclipse.viatra.examples.cps.xform.serializer.javaio.JavaIOBasedFileAccessor
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
-import org.eclipse.core.runtime.Platform
-import org.eclipse.viatra.examples.cps.xform.serializer.IFileAccessor
-import java.io.File
-import org.eclipse.core.internal.resources.Workspace
-import org.eclipse.core.resources.IWorkspaceDescription
 
-class M2TTransformationPhase extends AtomicPhase {
+class M2TTransformationPhase extends CPSBenchmarkPhase {
 	extension DefaultSerializer serializer = new DefaultSerializer
 
 	new(String name) {
-		super(name)
+		super(name, true)
 	}
 
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val timer = new TimeMetric("Time")
-		val memory = new MemoryMetric("Memory")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 
 		timer.startMeasure
 
@@ -75,8 +67,7 @@ class M2TTransformationPhase extends AtomicPhase {
 
 		timer.stopMeasure
 		memory.measure
-		
-		phaseResult.addMetrics(timer, memory)
+		return emptySet
 	}
 
 	private def performSerialization(CPSDataToken cpsToken, String folderString, IFileAccessor fileAccessor) {

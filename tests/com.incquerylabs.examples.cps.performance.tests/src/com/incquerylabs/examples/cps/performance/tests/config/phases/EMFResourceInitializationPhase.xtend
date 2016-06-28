@@ -11,18 +11,15 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
+import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
 import org.eclipse.viatra.examples.cps.cyberPhysicalSystem.CyberPhysicalSystemFactory
 import org.eclipse.viatra.examples.cps.deployment.DeploymentFactory
 import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil
-import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import org.eclipse.viatra.examples.cps.traceability.TraceabilityFactory
 
-class EMFResourceInitializationPhase extends AtomicPhase{
+class EMFResourceInitializationPhase extends CPSBenchmarkPhase{
 	
 	protected extension CyberPhysicalSystemFactory cpsFactory = CyberPhysicalSystemFactory.eINSTANCE
 	protected extension DeploymentFactory depFactory = DeploymentFactory.eINSTANCE
@@ -32,20 +29,19 @@ class EMFResourceInitializationPhase extends AtomicPhase{
 	
 	
 	new(String phaseName) {
-		super(phaseName)
+		super(phaseName, true)
 	}
 	
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val CPSDataToken cpsToken = token as CPSDataToken
-		val emfInitTimer = new TimeMetric("Time")
-		val emfInitMemory = new MemoryMetric("Memory")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
-		emfInitTimer.startMeasure
+		timer.startMeasure
+		
 		cpsToken.cps2dep = preparePersistedCPSModel(cpsToken.instancesDirPath + "/" + cpsToken.scenarioName,
 			cpsToken.xform.class.simpleName + cpsToken.size + "_" + System.nanoTime)
-		emfInitTimer.stopMeasure
-		emfInitMemory.measure
-		phaseResult.addMetrics(emfInitTimer, emfInitMemory)
+		
+		timer.stopMeasure
+		memory.measure
+		return emptySet
 	}
 	
 }

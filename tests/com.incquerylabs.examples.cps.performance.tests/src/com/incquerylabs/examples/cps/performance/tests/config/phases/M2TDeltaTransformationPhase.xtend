@@ -11,29 +11,23 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
+import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
-import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
+import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.xform.m2t.api.ChangeM2TOutputProvider
 import org.eclipse.viatra.examples.cps.xform.serializer.DefaultSerializer
 import org.eclipse.viatra.examples.cps.xform.serializer.eclipse.EclipseBasedFileAccessor
-import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.xform.serializer.javaio.JavaIOBasedFileAccessor
 
-class M2TDeltaTransformationPhase extends AtomicPhase {
+class M2TDeltaTransformationPhase extends CPSBenchmarkPhase {
 	protected extension DefaultSerializer serializer = new DefaultSerializer
 
 	new(String name) {
-		super(name)
+		super(name, true)
 	}
 
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val timer = new TimeMetric("Time")
-		val memory = new MemoryMetric("Memory")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 
 		timer.startMeasure
 
@@ -58,7 +52,6 @@ class M2TDeltaTransformationPhase extends AtomicPhase {
 
 		timer.stopMeasure
 		memory.measure
-
-		phaseResult.addMetrics(timer, memory)
+		return emptySet
 	}
 }

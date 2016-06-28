@@ -11,30 +11,25 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
-import eu.mondo.sam.core.DataToken
+import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.phases.AtomicPhase
-import eu.mondo.sam.core.results.PhaseResult
-import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 
-class M2MTransformationPhase extends AtomicPhase{
+class M2MTransformationPhase extends CPSBenchmarkPhase {
 	
 	new(String name) {
-		super(name)
+		super(name, true)
 	}
 	
-	override execute(DataToken token, PhaseResult phaseResult) {
-		val cpsToken = token as CPSDataToken
-		val timer = new TimeMetric("Time")
-		val memory = new MemoryMetric("Memory")
+	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
 		timer.startMeasure
+		
 		cpsToken.xform.executeTransformation
+		
 		timer.stopMeasure
 		memory.measure
-		
-		phaseResult.addMetrics(timer, memory)
+		return emptySet
 	}
 	
 }

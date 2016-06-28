@@ -19,6 +19,7 @@ import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationTy
 import org.eclipse.viatra.examples.cps.xform.m2t.api.ICPSGenerator
 import org.eclipse.viatra.examples.cps.xform.m2t.monitor.DeploymentChangeMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.apache.log4j.Logger
 
 @Accessors
 class CPSDataToken implements DataToken{
@@ -35,6 +36,7 @@ class CPSDataToken implements DataToken{
 	int seed
 	int size
 	int modificationIndex
+	Logger logger = Logger.getLogger("cps.performance.tests.token")
 	
 	CPSTransformationWrapper xform
 	
