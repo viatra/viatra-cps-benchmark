@@ -98,7 +98,6 @@ def runBenchmark(genType, trafoType, scale, runIndex):
         p.wait(timeout=CONST_TIMEOUT)
     except TimeoutExpired:
         print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
-        timeoutOrError = True
         kill_children(pid)
         return False
     return True
@@ -107,10 +106,12 @@ def starteclipses():
     for genType in DEFAULT_GENERATOR_TYPES:
         for trafoType in ALL_TRANSFORMATOR_TYPES:
             for scale in SCALES:
-                success = False
+                success = True
                 for runIndex in range(1,CONST_RUNS+1):
                     success = runBenchmark(genType, trafoType, scale, runIndex)
-                if timeoutOrError:
+					if not success:
+						break
+                if not success:
                     break
                     
     for genType in ALL_GENERATOR_TYPES:
@@ -118,10 +119,12 @@ def starteclipses():
             continue
         for trafoType in GENERATOR_TRANSFORMATOR_TYPES:
             for scale in SCALES:
-                success = False
+                success = True
                 for runIndex in range(1,CONST_RUNS+1):
                     success = runBenchmark(genType, trafoType, scale, runIndex)
-                if timeoutOrError:
+					if not success:
+						break
+                if not success:
                     break
 
 if __name__ == "__main__":
