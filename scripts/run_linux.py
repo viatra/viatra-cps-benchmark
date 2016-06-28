@@ -27,32 +27,32 @@ CONST_RUNS=5
 
 """
 Valid values for TRANSFORMATOR_TYPES:
- 	"BATCH_SIMPLE",
- 	"BATCH_OPTIMIZED",
- 	"BATCH_VIATRA_QUERY_RETE",
- 	"BATCH_VIATRA_QUERY_LOCAL_SEARCH",
- 	"BATCH_VIATRA_TRANSFORMATION",
- 	"INCR_VIATRA_QUERY_RESULT_TRACEABILITY",
- 	"INCR_VIATRA_EXPLICIT_TRACEABILITY",
- 	"INCR_VIATRA_AGGREGATED",
- 	"INCR_VIATRA_TRANSFORMATION"
+    "BATCH_SIMPLE",
+    "BATCH_OPTIMIZED",
+    "BATCH_VIATRA_QUERY_RETE",
+    "BATCH_VIATRA_QUERY_LOCAL_SEARCH",
+    "BATCH_VIATRA_TRANSFORMATION",
+    "INCR_VIATRA_QUERY_RESULT_TRACEABILITY",
+    "INCR_VIATRA_EXPLICIT_TRACEABILITY",
+    "INCR_VIATRA_AGGREGATED",
+    "INCR_VIATRA_TRANSFORMATION"
 """
 ALL_TRANSFORMATOR_TYPES=[
     "BATCH_SIMPLE",
- 	"BATCH_OPTIMIZED",
- 	"BATCH_VIATRA_QUERY_RETE",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH",
- 	"BATCH_VIATRA_TRANSFORMATION",
- 	"INCR_VIATRA_QUERY_RESULT_TRACEABILITY",
- 	"INCR_VIATRA_EXPLICIT_TRACEABILITY",
- 	"INCR_VIATRA_AGGREGATED",
- 	"INCR_VIATRA_TRANSFORMATION",
+    "BATCH_OPTIMIZED",
+    "BATCH_VIATRA_QUERY_RETE",
+    "BATCH_VIATRA_QUERY_LOCAL_SEARCH",
+    "BATCH_VIATRA_TRANSFORMATION",
+    "INCR_VIATRA_QUERY_RESULT_TRACEABILITY",
+    "INCR_VIATRA_EXPLICIT_TRACEABILITY",
+    "INCR_VIATRA_AGGREGATED",
+    "INCR_VIATRA_TRANSFORMATION",
 ]
 
 GENERATOR_TRANSFORMATOR_TYPES=[
     "BATCH_VIATRA_TRANSFORMATION",
- 	"INCR_VIATRA_AGGREGATED",
- 	"INCR_VIATRA_TRANSFORMATION",
+    "INCR_VIATRA_AGGREGATED",
+    "INCR_VIATRA_TRANSFORMATION",
 ]
 
 """
@@ -88,21 +88,21 @@ def kill_children(pid):
             proc.kill()
 
 def runBenchmark(genType, trafoType, scale, runIndex):
-	print("Clearing workspace")
-	shutil.rmtree("workspace", ignore_errors=True)
-	print("Running test XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), ", RUN: ", str(runIndex))
-	param = flatten([trafoType, str(scale), genType, str(runIndex)])
-	p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
-	pid = p.pid
-	try:
-		p.wait(timeout=CONST_TIMEOUT)
-	except TimeoutExpired:
-		print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
-		timeoutOrError = True
-		kill_children(pid)
-		return False
-	return True
-			
+    print("Clearing workspace")
+    shutil.rmtree("workspace", ignore_errors=True)
+    print("Running test XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), ", RUN: ", str(runIndex))
+    param = flatten([trafoType, str(scale), genType, str(runIndex)])
+    p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
+    pid = p.pid
+    try:
+        p.wait(timeout=CONST_TIMEOUT)
+    except TimeoutExpired:
+        print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
+        timeoutOrError = True
+        kill_children(pid)
+        return False
+    return True
+            
 def starteclipses():
     for genType in DEFAULT_GENERATOR_TYPES:
         for trafoType in ALL_TRANSFORMATOR_TYPES:
@@ -112,9 +112,10 @@ def starteclipses():
                     success = runBenchmark(genType, trafoType, scale, runIndex)
                 if timeoutOrError:
                     break
-	for genType in ALL_GENERATOR_TYPES:
-		if genType in DEFAULT_GENERATOR_TYPES:
-			continue
+                    
+    for genType in ALL_GENERATOR_TYPES:
+        if genType in DEFAULT_GENERATOR_TYPES:
+            continue
         for trafoType in GENERATOR_TRANSFORMATOR_TYPES:
             for scale in SCALES:
                 success = False
