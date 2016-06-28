@@ -109,8 +109,8 @@ def starteclipses():
                 success = True
                 for runIndex in range(1,CONST_RUNS+1):
                     success = runBenchmark(genType, trafoType, scale, runIndex)
-					if not success:
-						break
+                    if not success:
+                        break
                 if not success:
                     break
                     
@@ -122,8 +122,8 @@ def starteclipses():
                 success = True
                 for runIndex in range(1,CONST_RUNS+1):
                     success = runBenchmark(genType, trafoType, scale, runIndex)
-					if not success:
-						break
+                    if not success:
+                        break
                 if not success:
                     break
 
