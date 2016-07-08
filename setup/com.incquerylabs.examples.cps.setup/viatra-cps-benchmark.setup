@@ -71,17 +71,20 @@
         name="org.eclipse.viatra.query.sdk.feature.source.feature.group"
         versionRange="[1.2.0,2.0.0)"/>
     <requirement
-        name="org.eclipse.viatra.query.testing.sdk.feature.feature.group"/>
+        name="org.eclipse.viatra.query.testing.sdk.feature.feature.group"
+        versionRange="[1.2.0,2.0.0]"/>
     <requirement
         name="org.eclipse.viatra.addon.viewers.tooling.feature.feature.group"
-        versionRange="[0.13.0,0.14.0)"/>
+        versionRange="[0.14.0,0.15.0)"/>
     <requirement
         name="org.eclipse.xtext.sdk.feature.group"
         versionRange="[2.10.0,2.11.0)"/>
     <requirement
-        name="org.eclipse.gef4.geometry.feature.group"/>
+        name="org.eclipse.gef4.geometry.feature.group"
+        versionRange="[0.1.0.201607041345,0.1.0.201607041345]"/>
     <requirement
         name="org.eclipse.gef4.zest.sdk.feature.group"
+        versionRange="[0.1.0.201607041345,0.1.0.201607041345]"
         filter=""/>
     <requirement
         name="org.eclipse.viatra.query.tooling.ui.visualization.feature.feature.group"/>
@@ -93,7 +96,7 @@
         versionRange="[1.2.0,2.0.0)"/>
     <requirement
         name="org.eclipse.viatra.integration.mwe2.feature.feature.group"
-        versionRange="[0.13.0,0.14.0)"/>
+        versionRange="[0.13.0,0.15.0)"/>
     <repository
         url="http://download.eclipse.org/viatra/dependency"/>
     <repository
