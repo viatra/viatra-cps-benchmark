@@ -6,3 +6,4 @@ rm -rf diagrams
 mkdir diagrams
 python3 ${WORKSPACE}/mondo-sam/reporting/report.py --source ${WORKSPACE}/benchmark/results/results.csv \
 --output ${WORKSPACE}/benchmark/diagrams/ --config ${WORKSPACE}/scripts/config.json
+cp ${WORKSPACE}/benchmark/results/json/*.properties ${WORKSPACE}/benchmark/diagrams/

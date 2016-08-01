@@ -11,16 +11,23 @@
 
 package com.incquerylabs.examples.cps.performance.tests
 
-import eu.mondo.sam.core.BenchmarkEngine
-import eu.mondo.sam.core.results.JsonSerializer
-import eu.mondo.sam.core.scenarios.BenchmarkScenario
-import java.util.Random
-import org.apache.log4j.Logger
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
+import eu.mondo.sam.core.BenchmarkEngine
+import eu.mondo.sam.core.metrics.MemoryMetric
+import eu.mondo.sam.core.results.JsonSerializer
+import eu.mondo.sam.core.scenarios.BenchmarkScenario
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.Properties
+import java.util.Random
+import org.apache.log4j.Logger
+import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.tests.util.CPSTestBase
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.CPSTransformationWrapper
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
+import org.eclipse.viatra.query.runtime.ViatraQueryRuntimePlugin
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
@@ -28,8 +35,8 @@ import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import eu.mondo.sam.core.metrics.TimeMetric
-import eu.mondo.sam.core.metrics.MemoryMetric
+
+import static eu.mondo.sam.core.metrics.MemoryMetric.*
 
 @RunWith(Parameterized)
 abstract class CPSPerformanceTest extends CPSTestBase {
@@ -98,9 +105,26 @@ abstract class CPSPerformanceTest extends CPSTestBase {
 		completeToolchainIntegrationTest(jsonResultFolder)
 	}
 	
+	def void printVQRevision(String jsonResultFolder){
+	   val vqBundle = Platform.getBundle(ViatraQueryRuntimePlugin.PLUGIN_ID)
+	   val version = vqBundle.version.toString
+	   val scmRevision = vqBundle.getHeaders().get("SCM-Revision")
+	   val props = new Properties;
+	   props.put("viatra.query.version", version);
+	   props.put("viatra.query.revision", scmRevision);
+	   val file = new File(jsonResultFolder+File.separatorChar+"artifact.revision.properties");
+	   try{
+	       val out = new FileOutputStream(file)
+	       props.store(out, "");
+	       out.close    
+	   }catch(IOException e){
+	       throw new RuntimeException(e)
+	   }
+	}
+	
 	def void completeToolchainIntegrationTest(String jsonResultFolder) {
 		startTest
-		
+	
 		// communication unit between the phases
 		val CPSDataToken token = new CPSDataToken
 		token.scenarioName = scenario.class.simpleName
@@ -117,6 +141,7 @@ abstract class CPSPerformanceTest extends CPSTestBase {
 		engine.runBenchmark(scenario, token)
 
 		endTest
+		printVQRevision(jsonResultFolder)
 	}
 	
 	def BenchmarkScenario getScenario(int scale, Random rand)
