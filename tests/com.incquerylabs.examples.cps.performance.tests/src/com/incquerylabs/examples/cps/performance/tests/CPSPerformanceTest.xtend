@@ -107,6 +107,7 @@ abstract class CPSPerformanceTest extends CPSTestBase {
 	
 	def void printVQRevision(String jsonResultFolder){
 	   val vqBundle = Platform.getBundle(ViatraQueryRuntimePlugin.PLUGIN_ID)
+	   if (vqBundle == null) return
 	   val version = vqBundle.version.toString
 	   val scmRevision = vqBundle.getHeaders().get("SCM-Revision")
 	   val props = new Properties;
