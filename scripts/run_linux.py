@@ -26,7 +26,7 @@ RUNS determines how many times the same test is run
 CONST_RUNS=5
 
 """
-Valid values for TRANSFORMATOR_TYPES:
+Valid values for TRANSFORMATION_TYPES:
     "BATCH_SIMPLE",
     "BATCH_OPTIMIZED",
     "BATCH_VIATRA_QUERY_RETE",
@@ -40,7 +40,7 @@ Valid values for TRANSFORMATOR_TYPES:
     "INCR_VIATRA_AGGREGATED",
     "INCR_VIATRA_TRANSFORMATION"
 """
-ALL_TRANSFORMATOR_TYPES=[
+ALL_TRANSFORMATION_TYPES=[
     "BATCH_SIMPLE",
     "BATCH_OPTIMIZED",
     "BATCH_VIATRA_QUERY_RETE",
@@ -55,7 +55,7 @@ ALL_TRANSFORMATOR_TYPES=[
     "INCR_VIATRA_TRANSFORMATION",
 ]
 
-GENERATOR_TRANSFORMATOR_TYPES=[
+GENERATOR_TRANSFORMATION_TYPES=[
     "BATCH_VIATRA_TRANSFORMATION",
     "INCR_VIATRA_AGGREGATED",
     "INCR_VIATRA_TRANSFORMATION",
@@ -97,7 +97,10 @@ def runBenchmark(genType, trafoType, scale, runIndex):
     print("Clearing workspace")
     shutil.rmtree("workspace", ignore_errors=True)
     print("Running test XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), ", RUN: ", str(runIndex))
-    param = flatten([trafoType, str(scale), genType, str(runIndex)])
+    scenario = "TOOLCHAIN_INCREMENTAL"
+    if trafoType.startswith("BATCH_")
+        scenario = "TOOLCHAIN_BATCH"
+    param = flatten(["-scenario", scenario, "-case", "STATISTICS_BASED", "-transformationType", trafoType, "-scale", str(scale), "-generatorType", genType, "-runIndex", str(runIndex)])
     p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
     pid = p.pid
     try:
@@ -107,10 +110,10 @@ def runBenchmark(genType, trafoType, scale, runIndex):
         kill_children(pid)
         return False
     return True
-            
+
 def starteclipses():
     for genType in DEFAULT_GENERATOR_TYPES:
-        for trafoType in ALL_TRANSFORMATOR_TYPES:
+        for trafoType in ALL_TRANSFORMATION_TYPES:
             for scale in SCALES:
                 success = True
                 for runIndex in range(1,CONST_RUNS+1):
@@ -119,11 +122,11 @@ def starteclipses():
                         break
                 if not success:
                     break
-                    
+
     for genType in ALL_GENERATOR_TYPES:
         if genType in DEFAULT_GENERATOR_TYPES:
             continue
-        for trafoType in GENERATOR_TRANSFORMATOR_TYPES:
+        for trafoType in GENERATOR_TRANSFORMATION_TYPES:
             for scale in SCALES:
                 success = True
                 for runIndex in range(1,CONST_RUNS+1):
