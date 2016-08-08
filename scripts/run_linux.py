@@ -7,11 +7,13 @@ the exported application.
 
 @author: Tamas Borbas
 """
+import sys
 import subprocess
 import shutil
 import os
 import signal
 import psutil
+import json
 from subprocess import TimeoutExpired
 from subprocess import CalledProcessError
 
@@ -111,7 +113,10 @@ def runBenchmark(genType, trafoType, scale, runIndex):
         return False
     return True
 
-def starteclipses():
+def starteclipses(argv):
+    with open('data.json', 'r') as f:
+        data = json.load(f)
+
     for genType in DEFAULT_GENERATOR_TYPES:
         for trafoType in ALL_TRANSFORMATION_TYPES:
             for scale in SCALES:
@@ -137,4 +142,4 @@ def starteclipses():
                     break
 
 if __name__ == "__main__":
-    starteclipses()
+    starteclipses(sys.argv[1:])

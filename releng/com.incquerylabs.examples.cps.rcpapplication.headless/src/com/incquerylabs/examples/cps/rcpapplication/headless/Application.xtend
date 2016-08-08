@@ -33,8 +33,17 @@ import org.eclipse.xtend.lib.annotations.Data
  * This class controls all aspects of the application's execution
  */
 class Application implements IApplication {
- 	val static COMMON_LAYOUT = "%c{1} - %m%n";
-	val static FILE_LOG_LAYOUT_PREFIX = "[%d{MMM/dd HH:mm:ss}] ";
+ 	val static COMMON_LAYOUT = "%c{1} - %m%n"
+	val static FILE_LOG_LAYOUT_PREFIX = "[%d{MMM/dd HH:mm:ss}] "
+	
+	val static CASE_ARGUMENT = "-case"
+	val static GENERATOR_TYPE_ARGUMENT = "-generatorType"
+	val static RESULTS_ARGUMENT = "-results"
+	val static RUN_INDEX_ARGUMENT = "-runIndex"
+	val static SCALE_ARGUMENT = "-scale"
+	val static SCENARIO_ARGUMENT = "-scenario"
+	val static TRANSFORMATION_TYPE_ARGUMENT = "-transformationType"
+	
 	extension Logger logger = Logger.getLogger("cps.testrunner")
 	/* (non-Javadoc)
 	 * @see IApplication#start(org.eclipse.equinox.app.IApplicationContext)
@@ -66,38 +75,38 @@ class Application implements IApplication {
 		info("************ Start parse")
 		
 		var params = newHashMap(
-			"-runIndex" -> "1",
-		 	"-results" -> "./results")
+			RUN_INDEX_ARGUMENT -> "1",
+		 	RESULTS_ARGUMENT -> "./results")
 		var argIndex = 0
 		while(argIndex < args.length) {
 			switch args.get(argIndex) {
-				case "-scenario": {
+				case SCENARIO_ARGUMENT: {
 					argIndex++
-					params.put("-scenario", args.get(argIndex))
+					params.put(SCENARIO_ARGUMENT, args.get(argIndex))
 				}
-				case "-case": {
+				case CASE_ARGUMENT: {
 					argIndex++
-					params.put("-case", args.get(argIndex))
+					params.put(CASE_ARGUMENT, args.get(argIndex))
 				}
-				case "-transformationType": {
+				case TRANSFORMATION_TYPE_ARGUMENT: {
 					argIndex++
-					params.put("-transformationType", args.get(argIndex))
+					params.put(TRANSFORMATION_TYPE_ARGUMENT, args.get(argIndex))
 				}
-				case "-generatorType": {
+				case GENERATOR_TYPE_ARGUMENT: {
 					argIndex++
-					params.put("-generatorType", args.get(argIndex))
+					params.put(GENERATOR_TYPE_ARGUMENT, args.get(argIndex))
 				}
-				case "-scale": {
+				case SCALE_ARGUMENT: {
 					argIndex++
-					params.put("-scale", args.get(argIndex))
+					params.put(SCALE_ARGUMENT, args.get(argIndex))
 				}
-				case "-runIndex": {
+				case RUN_INDEX_ARGUMENT: {
 					argIndex++
-					params.put("-runIndex", args.get(argIndex))
+					params.put(RUN_INDEX_ARGUMENT, args.get(argIndex))
 				}
-				case "-results": {
+				case RESULTS_ARGUMENT: {
 					argIndex++
-					params.put("-results", args.get(argIndex))
+					params.put(RESULTS_ARGUMENT, args.get(argIndex))
 				}
 				default: {
 					argIndex++
@@ -106,21 +115,21 @@ class Application implements IApplication {
 		}
 		
 		// TODO move scenario specific argument parsing to ScenarioFactory!
-		val trafoType = TransformationType.valueOf(params.get("-transformationType"))
-		val scale = Integer.parseInt(params.get("-scale"))
-		val generatorType = GeneratorType.valueOf(params.get("-generatorType"))
-		val runIndex = Integer.parseInt(params.get("-runIndex"))
+		val trafoType = TransformationType.valueOf(params.get(TRANSFORMATION_TYPE_ARGUMENT))
+		val scale = Integer.parseInt(params.get(SCALE_ARGUMENT))
+		val generatorType = GeneratorType.valueOf(params.get(GENERATOR_TYPE_ARGUMENT))
+		val runIndex = Integer.parseInt(params.get(RUN_INDEX_ARGUMENT))
 		
 		val random = new Random(ScenarioBenchmarkingBase.RANDOM_SEED);
 		
-		val caseId = CaseIdentifier.valueOf(params.get("-case"))
-		val scenarioId = ScenarioIdentifier.valueOf(params.get("-scenario"))
+		val caseId = CaseIdentifier.valueOf(params.get(CASE_ARGUMENT))
+		val scenarioId = ScenarioIdentifier.valueOf(params.get(SCENARIO_ARGUMENT))
 
 		val bcase = CaseFactory.create.createCase(caseId, scale, random)
 		val tool = trafoType.name + "-" + generatorType.name
 		val scenario = ScenarioFactory.create.createScenario(scenarioId, bcase, runIndex, tool)
 		
-		val resultsFolderPath = params.get("-results")
+		val resultsFolderPath = params.get(RESULTS_ARGUMENT)
 		val arguments = new BenchmarkArguments(scenario, trafoType, generatorType, scale, resultsFolderPath)
 		
 		initLogger(arguments)
