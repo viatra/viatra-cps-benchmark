@@ -13,11 +13,9 @@ package com.incquerylabs.examples.cps.performance.tests.config.scenarios
 
 import eu.mondo.sam.core.results.CaseDescriptor
 import eu.mondo.sam.core.scenarios.BenchmarkScenario
-import org.eclipse.viatra.examples.cps.generator.utils.RandomUtils
 import com.incquerylabs.examples.cps.performance.tests.config.cases.BenchmarkCase
 
 abstract class CPSBenchmarkScenario extends BenchmarkScenario {
-	protected extension RandomUtils randUtil = new RandomUtils;
 	protected BenchmarkCase benchmarkCase;
 	
 	new(BenchmarkCase benchmarkCase) {

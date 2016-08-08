@@ -10,5 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.viatra.examples.cps.tests.util,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.xtend.lib;bundle-version="2.9.0",
- org.eclipse.viatra.examples.cps.xform.m2m.tests;bundle-version="0.1.0"
+ org.eclipse.viatra.examples.cps.xform.m2m.tests;bundle-version="0.1.0",
+ eu.mondo.sam.bundle;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
