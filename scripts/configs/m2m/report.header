@@ -4,6 +4,9 @@
 </head>
 <body>
   <h2>Benchmark results: M2M</h2>
+  Note: when accessing the report directly on Jenkins, images are not displayed in all browsers.
+  Google Chrome, Mozilla Firefox and Microsoft Edge are known to work.
+  You can also download the benchmark folder as a zip and open it locally.
   <h3>Configuration</h3>
   <div>
     <p>
