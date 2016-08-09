@@ -92,6 +92,7 @@
 						<exclude>**/integration/*.java</exclude>
 						<exclude>**/scenarios/*.java</exclude>
 						<exclude>**/queries/*.java</exclude>
+						<exclude>**/benchmarks/*.java</exclude>
 		            </excludes>
 		            <failIfNoTests>false</failIfNoTests>
 				</configuration>

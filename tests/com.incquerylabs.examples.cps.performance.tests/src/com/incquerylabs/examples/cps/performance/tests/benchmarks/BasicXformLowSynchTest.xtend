@@ -9,11 +9,12 @@
  *   Akos Horvath, Abel Hegedus, Tamas Borbas, Marton Bur, Zoltan Ujhelyi, Daniel Segesdi, Zsolt Kovari - initial API and implementation
  *******************************************************************************/
 
-package com.incquerylabs.examples.cps.performance.tests
+package com.incquerylabs.examples.cps.performance.tests.benchmarks
 
-import java.util.Random
+import com.incquerylabs.examples.cps.performance.tests.BasicXformTest
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import com.incquerylabs.examples.cps.performance.tests.config.cases.LowSynchCase
+import java.util.Random
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
 
 class BasicXformLowSynchTest extends BasicXformTest {

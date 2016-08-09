@@ -9,7 +9,7 @@
  *   Akos Horvath, Abel Hegedus, Tamas Borbas, Marton Bur, Zoltan Ujhelyi, Daniel Segesdi, Zsolt Kovari - initial API and implementation
  *******************************************************************************/
 
-package com.incquerylabs.examples.cps.performance.tests
+package com.incquerylabs.examples.cps.performance.tests.benchmarks
 
 import java.util.Random
 import org.eclipse.core.resources.ResourcesPlugin

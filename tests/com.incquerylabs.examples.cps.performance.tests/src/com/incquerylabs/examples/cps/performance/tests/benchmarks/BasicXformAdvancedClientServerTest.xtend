@@ -9,21 +9,21 @@
  *   Akos Horvath, Abel Hegedus, Tamas Borbas, Marton Bur, Zoltan Ujhelyi, Daniel Segesdi, Zsolt Kovari - initial API and implementation
  *******************************************************************************/
 
-package com.incquerylabs.examples.cps.performance.tests
+package com.incquerylabs.examples.cps.performance.tests.benchmarks
 
 import java.util.Random
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
-import com.incquerylabs.examples.cps.performance.tests.config.cases.SimpleScalingCase
+import com.incquerylabs.examples.cps.performance.tests.config.cases.AdvancedClientServerCase
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
 
-class BasicXformSimpleScalingTest extends BasicXformTest {
+class BasicXformAdvancedClientServerTest extends com.incquerylabs.examples.cps.performance.tests.BasicXformTest {
 	
 	new(TransformationType wrapperType, int scale, GeneratorType generatorType, int runIndex) {
 		super(wrapperType, scale, generatorType, runIndex)
 	}
 	
 	override getCase(int scale, Random rand) {
-		return new SimpleScalingCase(scale, rand)
+		return new AdvancedClientServerCase(scale, rand)
 	}
 	
 }
