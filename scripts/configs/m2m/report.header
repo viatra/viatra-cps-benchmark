@@ -3,6 +3,18 @@
 <head>
 </head>
 <body>
+  <h2>Benchmark results: M2M</h2>
+  <h3>Configuration</h3>
+  <div>
+    <p>
+      <a href="data.json">Input configuration</a> (click to view)
+      <br>
+      <a href="config.json">Diagram configuration</a> (click to view)
+    </p>
+  </div>
   <h3>Artifact revision information</h3>
+  <p>
+    <a href="artifact.revision.properties">Artifact revision</a> (click to view)
+  </p>
   <pre>
     <!-- CONTENTS OF artifact.revision.properties FILE -->
