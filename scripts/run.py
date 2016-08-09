@@ -9,82 +9,50 @@ the exported application.
 """
 import subprocess
 import shutil
+import json
 from subprocess import TimeoutExpired
 from subprocess import CalledProcessError
-
-
-"""
-TIMEOUT is in seconds
-"""
-CONST_TIMEOUT=1000
-
-"""
-RUNS determines how many times the same test is run
-"""
-CONST_RUNS=5
-
-"""
-Valid values for TRANSFORMATOR_TYPES:
-    "BATCH_SIMPLE",
-    "BATCH_OPTIMIZED",
-    "BATCH_INCQUERY",
-    "BATCH_VIATRA",
-    "INCR_QUERY_RESULT_TRACEABILITY",
-    "INCR_EXPLICIT_TRACEABILITY",
-    "INCR_AGGREGATED",
-    "INCR_VIATRA"
-"""
-TRANSFORMATOR_TYPES=[
-    "BATCH_SIMPLE",
-    "BATCH_OPTIMIZED",
-    "BATCH_INCQUERY",
-    "BATCH_VIATRA",
-    "INCR_QUERY_RESULT_TRACEABILITY",
-    "INCR_EXPLICIT_TRACEABILITY",
-    "INCR_AGGREGATED",
-    "INCR_VIATRA"
-    ]
-
-
-"""
-SCALES are integers
-"""
-SCALES=[1,2,4,8,16,32,64,128,256,512]
-
-
-"""
-Valid values for GENERATOR_TYPES:
-    "TEMPLATE",
-    "JDT"
-"""
-GENERATOR_TYPES=["TEMPLATE","JDT"]
-
 
 def flatten(lst):
     return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
 
 
-def starteclipses():
-    for genType in GENERATOR_TYPES:
-        for trafoType in TRANSFORMATOR_TYPES:
-            for scale in SCALES:
-                timeoutOrError = False
-                for runIndex in range(1,CONST_RUNS+1):
-                    print("Clearing workspace")
-                    shutil.rmtree("workspace", ignore_errors=True)
-                    print("Running test XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), ", RUN: ", str(runIndex))
-                    try:
-                        subprocess.call(flatten(["eclipse\eclipse.exe", trafoType, str(scale), genType, str(runIndex)]), timeout=CONST_TIMEOUT)
-                    except TimeoutExpired:
-                        print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
-                        timeoutOrError = True
-                        break
-                    except CalledProcessError as e:
-                        print(" >> Program exited with error, continuing with the next transformation type.")
-                        timeoutOrError = True
-                        break
-                if timeoutOrError:
-                    break
+def runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC):
+    print("Clearing workspace")
+    shutil.rmtree("workspace", ignore_errors=True)
+    print("Running test SCENARIO: ", scenario, ", CASE: ", case, ", XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), "TIMEOUT: ", str(timeoutC), ", RUN: ", str(runIndex))
+    param = flatten(["-scenario", scenario, "-case", case, "-transformationType", trafoType, "-scale", str(scale), "-generatorType", genType, "-runIndex", str(runIndex)])
+    try:
+        subprocess.call(flatten(["eclipse\eclipse.exe", param]), timeout=CONST_TIMEOUT)
+    except TimeoutExpired:
+        print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
+        return False
+    except CalledProcessError as e:
+        print(" >> Program exited with error, continuing with the next transformation type.")
+        return False
+    return True
+
+def starteclipses(argv):
+    print("Using benchmark config ", argv[0])
+    with open('data.json', 'r') as f:
+        data = json.load(f)
+
+    for benchmark in data["benchmark"]:
+        scenario = benchmark["scenario"]
+        timeoutC = benchmark["timeout"]
+        print("Running benchmark with scenario ", scenario)
+        for case in benchmark["cases"]:
+            print("-- Case: ", case)
+            for genType in benchmark["generator_types"]:
+                for trafoType in benchmark["transformation_types"]:
+                    for scale in benchmark["scales"]:
+                        success = True
+                        for runIndex in range(1,benchmark["runs"]+1):
+                            success = runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC)
+                            if not success:
+                                break
+                        if not success:
+                            break
 
 if __name__ == "__main__":
-    starteclipses()
+    starteclipses(sys.argv[1:])

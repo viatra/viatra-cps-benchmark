@@ -17,73 +17,6 @@ import json
 from subprocess import TimeoutExpired
 from subprocess import CalledProcessError
 
-"""
-TIMEOUT is in seconds
-"""
-CONST_TIMEOUT=1000
-
-"""
-RUNS determines how many times the same test is run
-"""
-CONST_RUNS=5
-
-"""
-Valid values for TRANSFORMATION_TYPES:
-    "BATCH_SIMPLE",
-    "BATCH_OPTIMIZED",
-    "BATCH_VIATRA_QUERY_RETE",
-    "BATCH_VIATRA_QUERY_LOCAL_SEARCH",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH_NO_FLAT",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH_DUMB_PLANNER",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH_WO_INDEXER",
-    "BATCH_VIATRA_TRANSFORMATION",
-    "INCR_VIATRA_QUERY_RESULT_TRACEABILITY",
-    "INCR_VIATRA_EXPLICIT_TRACEABILITY",
-    "INCR_VIATRA_AGGREGATED",
-    "INCR_VIATRA_TRANSFORMATION"
-"""
-ALL_TRANSFORMATION_TYPES=[
-    "BATCH_SIMPLE",
-    "BATCH_OPTIMIZED",
-    "BATCH_VIATRA_QUERY_RETE",
-    "BATCH_VIATRA_QUERY_LOCAL_SEARCH",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH_NO_FLAT",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH_DUMB_PLANNER",
-	"BATCH_VIATRA_QUERY_LOCAL_SEARCH_WO_INDEXER",
-    "BATCH_VIATRA_TRANSFORMATION",
-    "INCR_VIATRA_QUERY_RESULT_TRACEABILITY",
-    "INCR_VIATRA_EXPLICIT_TRACEABILITY",
-    "INCR_VIATRA_AGGREGATED",
-    "INCR_VIATRA_TRANSFORMATION",
-]
-
-GENERATOR_TRANSFORMATION_TYPES=[
-    "BATCH_VIATRA_TRANSFORMATION",
-    "INCR_VIATRA_AGGREGATED",
-    "INCR_VIATRA_TRANSFORMATION",
-]
-
-"""
-SCALES are integers
-"""
-SCALES=[1,2,4,8,16,32,64]
-#SCALES=[1,2]
-
-
-"""
-Valid values for GENERATOR_TYPES:
-    "TEMPLATE",
-    "JDT"
-"""
-ALL_GENERATOR_TYPES=[
-    "TEMPLATE",
-    "JDT"
-]
-
-DEFAULT_GENERATOR_TYPES=[
-    "TEMPLATE"
-]
-
 def flatten(lst):
     return sum(([x] if not isinstance(x, list) else flatten(x) for x in lst), [])
 
@@ -95,51 +28,42 @@ def kill_children(pid):
             print("Found children of ", pid, ": terminating!")
             proc.kill()
 
-def runBenchmark(genType, trafoType, scale, runIndex):
+def runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC):
     print("Clearing workspace")
     shutil.rmtree("workspace", ignore_errors=True)
-    print("Running test XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), ", RUN: ", str(runIndex))
-    scenario = "TOOLCHAIN_INCREMENTAL"
-    if trafoType.startswith("BATCH_")
-        scenario = "TOOLCHAIN_BATCH"
-    param = flatten(["-scenario", scenario, "-case", "STATISTICS_BASED", "-transformationType", trafoType, "-scale", str(scale), "-generatorType", genType, "-runIndex", str(runIndex)])
+    print("Running test SCENARIO: ", scenario, ", CASE: ", case, ", XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), "TIMEOUT: ", str(timeoutC), ", RUN: ", str(runIndex))
+    param = flatten(["-scenario", scenario, "-case", case, "-transformationType", trafoType, "-scale", str(scale), "-generatorType", genType, "-runIndex", str(runIndex)])
     p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
     pid = p.pid
     try:
-        p.wait(timeout=CONST_TIMEOUT)
+        p.wait(timeout=timeoutC)
     except TimeoutExpired:
-        print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
+        print(" >> Timed out after ", timeoutC, "s, continuing with the next transformation type.")
         kill_children(pid)
         return False
     return True
 
 def starteclipses(argv):
+    print("Using benchmark config ", argv[0])
     with open('data.json', 'r') as f:
         data = json.load(f)
 
-    for genType in DEFAULT_GENERATOR_TYPES:
-        for trafoType in ALL_TRANSFORMATION_TYPES:
-            for scale in SCALES:
-                success = True
-                for runIndex in range(1,CONST_RUNS+1):
-                    success = runBenchmark(genType, trafoType, scale, runIndex)
-                    if not success:
-                        break
-                if not success:
-                    break
-
-    for genType in ALL_GENERATOR_TYPES:
-        if genType in DEFAULT_GENERATOR_TYPES:
-            continue
-        for trafoType in GENERATOR_TRANSFORMATION_TYPES:
-            for scale in SCALES:
-                success = True
-                for runIndex in range(1,CONST_RUNS+1):
-                    success = runBenchmark(genType, trafoType, scale, runIndex)
-                    if not success:
-                        break
-                if not success:
-                    break
+    for benchmark in data["benchmark"]:
+        scenario = benchmark["scenario"]
+        timeoutC = benchmark["timeout"]
+        print("Running benchmark with scenario ", scenario)
+        for case in benchmark["cases"]:
+            print("-- Case: ", case)
+            for genType in benchmark["generator_types"]:
+                for trafoType in benchmark["transformation_types"]:
+                    for scale in benchmark["scales"]:
+                        success = True
+                        for runIndex in range(1,benchmark["runs"]+1):
+                            success = runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC)
+                            if not success:
+                                break
+                        if not success:
+                            break
 
 if __name__ == "__main__":
     starteclipses(sys.argv[1:])
