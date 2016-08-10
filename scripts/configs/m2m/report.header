@@ -13,6 +13,8 @@
       <a href="data.json">Input configuration</a> (click to view)
       <br>
       <a href="config.json">Diagram configuration</a> (click to view)
+      <br>
+      See <a href="https://github.com/viatra/viatra-cps-benchmark/wiki/Benchmark-specification">wiki</a> for details.
     </p>
   </div>
   <h3>Artifact revision information</h3>
