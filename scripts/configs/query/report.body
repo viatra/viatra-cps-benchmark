@@ -1,0 +1,32 @@
+</pre>
+<h3>Generated diagrams (click image for PDF version)</h3>
+<div>
+  <p>
+    <b>Runtime of initialization and first query phase</b>
+    <br>
+    <a href="diagrams/init_query_time.pdf"><img src="diagrams/init_query_time.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Runtime of model modification and query phase</b>
+    <br>
+    <a href="diagrams/modify_query_time.pdf"><img src="diagrams/modify_query_time.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Memory usage after query phase</b>
+    <br>
+    <a href="diagrams/query_memory.pdf"><img src="diagrams/query_memory.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Full workflow time</b>
+    <br>
+    <a href="diagrams/full_workflow_time.pdf"><img src="diagrams/full_workflow_time.png" width="1024px"></a>
+  </p>
+</div>
+</body>
+</html>

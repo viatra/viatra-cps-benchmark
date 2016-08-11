@@ -30,7 +30,7 @@ class ScenarioFactory {
 				new BasicXformScenario(benchmarkCase)
 			}
 			case QUERY: {
-				throw new UnsupportedOperationException("Query scenario not yet implemented")
+				new QueryScenario(benchmarkCase)
 			}
 		}
 		scenario.runIndex = runIndex

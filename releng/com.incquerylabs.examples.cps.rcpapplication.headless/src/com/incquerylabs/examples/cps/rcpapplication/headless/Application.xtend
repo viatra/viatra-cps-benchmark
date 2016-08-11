@@ -28,6 +28,10 @@ import org.eclipse.equinox.app.IApplication
 import org.eclipse.equinox.app.IApplicationContext
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
 import org.eclipse.xtend.lib.annotations.Data
+import com.incquerylabs.examples.cps.performance.tests.queries.CPSQueryWrapper
+import com.incquerylabs.examples.cps.performance.tests.queries.QueryIdentifier
+import com.incquerylabs.examples.cps.performance.tests.queries.QueryWrapperIdentifier
+import com.incquerylabs.examples.cps.performance.tests.queries.QueryWrapperFactory
 
 /** 
  * This class controls all aspects of the application's execution
@@ -43,11 +47,11 @@ class Application implements IApplication {
 	val static SCALE_ARGUMENT = "-scale"
 	val static SCENARIO_ARGUMENT = "-scenario"
 	val static TRANSFORMATION_TYPE_ARGUMENT = "-transformationType"
+	val static QUERY_TOOL_ARGUMENT = "-queryTool"
+	val static QUERY_ID_ARGUMENT = "-query"
 	
 	extension Logger logger = Logger.getLogger("cps.testrunner")
-	/* (non-Javadoc)
-	 * @see IApplication#start(org.eclipse.equinox.app.IApplicationContext)
-	 */
+
 	override Object start(IApplicationContext context) throws Exception {
 		info("************ Test started ************")
 		val args = context.arguments.get(IApplicationContext.APPLICATION_ARGS) as String[]
@@ -108,29 +112,48 @@ class Application implements IApplication {
 					argIndex++
 					params.put(RESULTS_ARGUMENT, args.get(argIndex))
 				}
+				case QUERY_TOOL_ARGUMENT: {
+					argIndex++
+					params.put(QUERY_TOOL_ARGUMENT, args.get(argIndex))
+				}
+				case QUERY_ID_ARGUMENT: {
+					argIndex++
+					params.put(QUERY_ID_ARGUMENT, args.get(argIndex))
+				}
 				default: {
 					argIndex++
 				}
 			}
 		}
 		
-		// TODO move scenario specific argument parsing to ScenarioFactory!
-		val trafoType = TransformationType.valueOf(params.get(TRANSFORMATION_TYPE_ARGUMENT))
 		val scale = Integer.parseInt(params.get(SCALE_ARGUMENT))
-		val generatorType = GeneratorType.valueOf(params.get(GENERATOR_TYPE_ARGUMENT))
 		val runIndex = Integer.parseInt(params.get(RUN_INDEX_ARGUMENT))
 		
 		val random = new Random(ScenarioBenchmarkingBase.RANDOM_SEED);
 		
 		val caseId = CaseIdentifier.valueOf(params.get(CASE_ARGUMENT))
-		val scenarioId = ScenarioIdentifier.valueOf(params.get(SCENARIO_ARGUMENT))
-
 		val bcase = CaseFactory.create.createCase(caseId, scale, random)
-		val tool = trafoType.name + "-" + generatorType.name
-		val scenario = ScenarioFactory.create.createScenario(scenarioId, bcase, runIndex, tool)
-		
 		val resultsFolderPath = params.get(RESULTS_ARGUMENT)
-		val arguments = new BenchmarkArguments(scenario, trafoType, generatorType, scale, resultsFolderPath)
+
+		var BenchmarkArguments arguments = null
+		var String tool
+		
+		val scenarioId = ScenarioIdentifier.valueOf(params.get(SCENARIO_ARGUMENT))
+		// TODO move scenario specific argument parsing to ScenarioFactory!
+		if(scenarioId == ScenarioIdentifier.QUERY){
+			val queryId = QueryIdentifier.valueOf(params.get(QUERY_ID_ARGUMENT))
+			val queryTool = QueryWrapperIdentifier.valueOf(params.get(QUERY_TOOL_ARGUMENT))
+			tool = queryTool + "-" + queryId
+			val scenario = ScenarioFactory.create.createScenario(scenarioId, bcase, runIndex, tool)
+			val queryWrapper = QueryWrapperFactory.create.createQueryWrapper(queryTool, queryId)
+			arguments = new BenchmarkArguments(scenario, null, null, queryWrapper, scale, resultsFolderPath)
+		} else {
+			val trafoType = TransformationType.valueOf(params.get(TRANSFORMATION_TYPE_ARGUMENT))
+			val generatorType = GeneratorType.valueOf(params.get(GENERATOR_TYPE_ARGUMENT))
+			tool = trafoType.name + "-" + generatorType.name
+			val scenario = ScenarioFactory.create.createScenario(scenarioId, bcase, runIndex, tool)
+			arguments = new BenchmarkArguments(scenario, trafoType, generatorType, null, scale, resultsFolderPath)
+		}
 		
 		initLogger(arguments)
 		
@@ -151,7 +174,7 @@ class Application implements IApplication {
 	private def initLogger(BenchmarkArguments arguments) {	
 		Logger.getLogger("org.eclipse.viatra.query").level = Level.INFO
 		
-		val logFilePath = '''«arguments.resultsFolderPath»/log/log_«arguments.transformationType»_«arguments.generatorType»_size_«arguments.scale»_startedAt_«System.currentTimeMillis».log'''
+		val logFilePath = '''«arguments.resultsFolderPath»/log/log_«arguments.scenario.tool»_size_«arguments.scale»_startedAt_«System.currentTimeMillis».log'''
 		val fileAppender = new FileAppender(new PatternLayout(FILE_LOG_LAYOUT_PREFIX+COMMON_LAYOUT),logFilePath,true)
 		val rootLogger = Logger.rootLogger
 		rootLogger.removeAllAppenders
@@ -170,6 +193,7 @@ class Application implements IApplication {
 			arguments.scenario,
 			arguments.transformationType,
 			arguments.generatorType,
+			arguments.queryWrapper,
 			1,
 			arguments.resultsFolderPath
 		)
@@ -199,6 +223,7 @@ class Application implements IApplication {
 			it.scale = arguments.scale
 			it.wrapperType = arguments.transformationType
 			it.generatorType = arguments.generatorType
+			it.queryWrapper = arguments.queryWrapper
 		]
 		val benchmark = builder.build
 		benchmark.cleanupBefore()
@@ -216,9 +241,6 @@ class Application implements IApplication {
 		ScenarioBenchmarkingBase.callGC()
 	}
 
-	/* (non-Javadoc)
-	 * @see IApplication#stop()
-	 */
 	override void stop() {
 		// nothing to do
 	}
@@ -240,6 +262,7 @@ class BenchmarkArguments {
 	BenchmarkScenario scenario
 	TransformationType transformationType
 	GeneratorType generatorType
+	CPSQueryWrapper queryWrapper
 	int scale
 	String resultsFolderPath
 	

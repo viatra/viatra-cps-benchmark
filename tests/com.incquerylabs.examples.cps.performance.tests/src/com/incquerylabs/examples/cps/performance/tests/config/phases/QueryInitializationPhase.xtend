@@ -8,39 +8,25 @@
  * Contributors:
  *   Akos Horvath, Abel Hegedus, Tamas Borbas, Marton Bur, Zoltan Ujhelyi, Daniel Segesdi, Zsolt Kovari - initial API and implementation
  *******************************************************************************/
-
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import org.eclipse.viatra.examples.cps.cyberPhysicalSystem.CyberPhysicalSystemFactory
-import org.eclipse.viatra.examples.cps.deployment.DeploymentFactory
-import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil
-import org.eclipse.viatra.examples.cps.traceability.TraceabilityFactory
 
-class EMFResourceInitializationPhase extends CPSBenchmarkPhase{
+class QueryInitializationPhase extends CPSBenchmarkPhase {
 	
-	protected extension CyberPhysicalSystemFactory cpsFactory = CyberPhysicalSystemFactory.eINSTANCE
-	protected extension DeploymentFactory depFactory = DeploymentFactory.eINSTANCE
-	protected extension TraceabilityFactory traceFactory = TraceabilityFactory.eINSTANCE
-	
-	protected extension CPSModelBuilderUtil modelBuilderUtil = new CPSModelBuilderUtil 
-	
-	
-	new(String phaseName) {
-		super(phaseName, true)
+	new(String name) {
+		super(name, false)
 	}
 	
 	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
 		timer.startMeasure
 		
-		cpsToken.cps2dep = preparePersistedCPSModel(cpsToken.instancesDirPath + "/" + cpsToken.scenarioName,
-			cpsToken.toolName + cpsToken.scale + "_" + System.nanoTime)
+		cpsToken.query.initializeQueryTool(cpsToken.cps2dep)
 		
 		timer.stopMeasure
-		memory.measure
 		return emptySet
 	}
 	

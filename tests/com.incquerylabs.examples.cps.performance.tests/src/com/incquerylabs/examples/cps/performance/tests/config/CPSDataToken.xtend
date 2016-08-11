@@ -11,7 +11,9 @@
 
 package com.incquerylabs.examples.cps.performance.tests.config
 
+import com.incquerylabs.examples.cps.performance.tests.queries.CPSQueryWrapper
 import eu.mondo.sam.core.DataToken
+import org.apache.log4j.Logger
 import org.eclipse.core.resources.IFolder
 import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.CPSTransformationWrapper
@@ -19,26 +21,36 @@ import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationTy
 import org.eclipse.viatra.examples.cps.xform.m2t.api.ICPSGenerator
 import org.eclipse.viatra.examples.cps.xform.m2t.monitor.DeploymentChangeMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.apache.log4j.Logger
 
 @Accessors
 class CPSDataToken implements DataToken{
 	
-	GeneratorType generatorType
-	TransformationType transformationType
 	String scenarioName
+	String toolName
 	CPSToDeployment cps2dep
 	String instancesDirPath
+	int seed
+	int scale
+	int modificationIndex
+	Logger logger = Logger.getLogger("cps.performance.tests.token")
+
+	/*
+	 * TRANSFORMATION
+	 */
+
+	GeneratorType generatorType
+	TransformationType transformationType
 	DeploymentChangeMonitor changeMonitor
 	ICPSGenerator codeGenerator 
 	IFolder srcFolder
 	String folderPath
-	int seed
-	int size
-	int modificationIndex
-	Logger logger = Logger.getLogger("cps.performance.tests.token")
-	
 	CPSTransformationWrapper xform
+	
+	/*
+	 * QUERY
+	 */
+	 
+	CPSQueryWrapper query
 	
 	override init() {
 		modificationIndex = 1

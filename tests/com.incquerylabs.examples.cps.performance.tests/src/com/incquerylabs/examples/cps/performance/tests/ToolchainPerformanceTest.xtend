@@ -25,7 +25,7 @@ abstract class ToolchainPerformanceTest extends PropertiesBasedTest {
 	}
 	
 	override getScenario(int scale, Random rand) {
-		if (wrapperType.isIncremental){
+		if (token.transformationType.isIncremental){
 			return new ToolChainPerformanceIncrementalScenario(getCase(scale, rand))
 		} else {
 			return new ToolChainPerformanceBatchScenario(getCase(scale, rand))

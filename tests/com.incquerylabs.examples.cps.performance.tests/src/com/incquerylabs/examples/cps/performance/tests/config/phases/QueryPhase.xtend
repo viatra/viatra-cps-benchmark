@@ -24,7 +24,8 @@ class QueryPhase extends CPSBenchmarkPhase {
 	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		timer.startMeasure
 		
-		cpsToken.xform.executeTransformation
+		// TODO get parameter binding from case?
+		cpsToken.query.executeQueryTool(newHashMap())
 		
 		timer.stopMeasure
 		memory.measure

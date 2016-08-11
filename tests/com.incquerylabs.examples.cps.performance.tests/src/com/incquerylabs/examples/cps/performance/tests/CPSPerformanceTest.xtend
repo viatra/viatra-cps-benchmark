@@ -23,10 +23,10 @@ import org.junit.runners.Parameterized
 abstract class CPSPerformanceTest extends ScenarioBenchmarkingBase {
 	
     new(TransformationType wrapperType,	int scale, GeneratorType generatorType, int runIndex) {
-		this.wrapperType = wrapperType
-		this.scale = scale 
-		this.generatorType = generatorType
-		this.xform = wrapperType.wrapper
+		this.token.transformationType = wrapperType
+		this.token.scale = scale 
+		this.token.generatorType = generatorType
+		this.token.xform = wrapperType.wrapper
     	this.scenario = getScenario(scale, rand)
 		this.scenario.runIndex = runIndex
 		this.scenario.tool = wrapperType.name + "-" + generatorType.name

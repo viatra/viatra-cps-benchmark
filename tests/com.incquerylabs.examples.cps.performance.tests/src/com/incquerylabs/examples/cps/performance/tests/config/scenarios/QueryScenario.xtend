@@ -12,7 +12,7 @@ package com.incquerylabs.examples.cps.performance.tests.config.scenarios
 
 import com.incquerylabs.examples.cps.performance.tests.config.cases.BenchmarkCase
 import com.incquerylabs.examples.cps.performance.tests.config.phases.EMFResourceInitializationPhase
-import com.incquerylabs.examples.cps.performance.tests.config.phases.InitializationPhase
+import com.incquerylabs.examples.cps.performance.tests.config.phases.QueryInitializationPhase
 import com.incquerylabs.examples.cps.performance.tests.config.phases.QueryPhase
 import eu.mondo.sam.core.phases.IterationPhase
 import eu.mondo.sam.core.phases.SequencePhase
@@ -41,7 +41,7 @@ class QueryScenario extends CPSBenchmarkScenario {
 		seq.addPhases(
 			new EMFResourceInitializationPhase("EMFResourceInitialization"),
 			benchmarkCase.getGenerationPhase("Generation"),
-			new InitializationPhase("Initialization"),
+			new QueryInitializationPhase("Initialization"),
 			new QueryPhase("Query1"),
 			iter
 		)

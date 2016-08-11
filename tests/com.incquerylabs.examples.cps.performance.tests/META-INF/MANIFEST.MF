@@ -7,11 +7,13 @@ Bundle-Vendor: IncQueryLabs Ltd.
 Export-Package: com.incquerylabs.examples.cps.performance.tests,
  com.incquerylabs.examples.cps.performance.tests.config,
  com.incquerylabs.examples.cps.performance.tests.config.cases,
- com.incquerylabs.examples.cps.performance.tests.config.scenarios
+ com.incquerylabs.examples.cps.performance.tests.config.scenarios,
+ com.incquerylabs.examples.cps.performance.tests.queries
 Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.core.runtime;bundle-version="3.10.0",
  org.eclipse.core.resources;bundle-version="3.9.0",
  org.eclipse.viatra.examples.cps.queries;bundle-version="0.1.0",
+ org.eclipse.viatra.examples.cps.xform.m2m.batch.eiq;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.xform.m2m.incr.expl;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.xform.m2t;bundle-version="0.1.0",
@@ -23,6 +25,7 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.viatra.examples.cps.generator.tests;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.xform.m2m.tests;bundle-version="0.1.0",
  org.eclipse.viatra.query.runtime.base.itc;bundle-version="[1.2.0,2.0.0)",
- eu.mondo.sam.bundle;bundle-version="0.1.0"
+ eu.mondo.sam.bundle;bundle-version="0.1.0",
+ org.eclipse.viatra.query.runtime.localsearch;bundle-version="1.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j;version="1.2.15"

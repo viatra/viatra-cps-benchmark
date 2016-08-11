@@ -1,0 +1,23 @@
+{
+  "benchmark": [
+    {
+      "scenario" : "QUERY",
+      "cases" : [
+        "STATISTICS_BASED"
+      ],
+      "query_tool": [
+        "VIATRA_QUERY_RETE",
+	      "VIATRA_QUERY_LOCAL_SEARCH",
+	      "VIATRA_QUERY_LOCAL_SEARCH_NO_FLAT",
+        "VIATRA_QUERY_LOCAL_SEARCH_DUMB_PLANNER",
+        "VIATRA_QUERY_LOCAL_SEARCH_WO_INDEXER"
+      ],
+      "query": [
+        "TRIGGER_PAIR"
+      ],
+      "scales": [1,2,4,8,16,32,64,128],
+      "timeout": 1000,
+      "runs": 5
+    }
+  ]
+}

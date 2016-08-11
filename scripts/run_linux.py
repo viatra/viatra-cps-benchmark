@@ -43,6 +43,21 @@ def runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC):
         return False
     return True
 
+def runQueryBenchmark(scenario, case, queryTool, query, scale, runIndex, timeoutC):
+    print("Clearing workspace")
+    shutil.rmtree("workspace", ignore_errors=True)
+    print("Running test SCENARIO: ", scenario, ", CASE: ", case, ", QUERYTOOL: ", queryTool, ", QUERY: ", query, ", SCALE: ", str(scale), "TIMEOUT: ", str(timeoutC), ", RUN: ", str(runIndex))
+    param = flatten(["-scenario", scenario, "-case", case, "-queryTool", queryTool, "-scale", str(scale), "-query", query, "-runIndex", str(runIndex)])
+    p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
+    pid = p.pid
+    try:
+        p.wait(timeout=timeoutC)
+    except TimeoutExpired:
+        print(" >> Timed out after ", timeoutC, "s, continuing with the next transformation type.")
+        kill_children(pid)
+        return False
+    return True
+
 def starteclipses(argv):
     print("Using benchmark config ", argv[0])
     with open('data.json', 'r') as f:
@@ -64,6 +79,17 @@ def starteclipses(argv):
                                 break
                         if not success:
                             break
+                            
+        for queryTool in benchmark["queryTool"]:
+            for query in benchmark["query"]:
+                for scale in benchmark["scales"]:
+                    success = True
+                    for runIndex in range(1,benchmark["runs"]+1):
+                        success = runQueryBenchmark(scenario, case, queryTool, query, scale, runIndex, timeoutC)
+                        if not success:
+                            break
+                    if not success:
+                        break
 
 if __name__ == "__main__":
     starteclipses(sys.argv[1:])

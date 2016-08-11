@@ -14,6 +14,7 @@ import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import eu.mondo.sam.core.scenarios.BenchmarkScenario
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
 import org.eclipse.xtend.lib.annotations.Accessors
+import com.incquerylabs.examples.cps.performance.tests.queries.CPSQueryWrapper
 
 @Accessors
 class CPSBenchmarkBuilder {
@@ -22,6 +23,7 @@ class CPSBenchmarkBuilder {
 	var BenchmarkScenario scenario
 	var GeneratorType generatorType
 	var TransformationType wrapperType
+	var CPSQueryWrapper queryWrapper
 	
 	def static create() {
 		return new CPSBenchmarkBuilder
@@ -29,11 +31,14 @@ class CPSBenchmarkBuilder {
 	
 	def build() {
 		val benchmark = new ScenarioBenchmarkingBase() => [
-			wrapperType = getWrapperType
-			generatorType = getGeneratorType
-			scale = getScale
+			token.transformationType = getWrapperType
+			token.generatorType = getGeneratorType
+			token.scale = getScale
+			token.xform = wrapperType?.wrapper
+			token.query = queryWrapper
 			scenario = getScenario
-			xform = wrapperType.wrapper
+			token.toolName = scenario.tool
+			token.scenarioName = scenario.class.simpleName
 		]
 		return benchmark
 	}
