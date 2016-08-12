@@ -48,7 +48,7 @@ class ScenarioBenchmarkingBase extends CPSTestBase {
     	info('''START TEST: Xform: «wrapperType», Gen: «generatorType», Scale: «scale», Scenario: «scenario.class.name»''')
     }
     
-    def void printVQRevision(String jsonResultFolder){
+    def static void printVQRevision(String jsonResultFolder){
 	   val vqBundle = Platform.getBundle(ViatraQueryRuntimePlugin.PLUGIN_ID)
 	   if (vqBundle == null) return
 	   val version = vqBundle.version.toString

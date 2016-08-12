@@ -10,13 +10,16 @@
  *******************************************************************************/
 package com.incquerylabs.examples.cps.rcpapplication.headless
 
-import com.incquerylabs.examples.cps.performance.tests.CPSBenchmarkBuilder
 import com.incquerylabs.examples.cps.performance.tests.ScenarioBenchmarkingBase
+import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import com.incquerylabs.examples.cps.performance.tests.config.cases.CaseFactory
 import com.incquerylabs.examples.cps.performance.tests.config.cases.CaseIdentifier
 import com.incquerylabs.examples.cps.performance.tests.config.scenarios.ScenarioFactory
 import com.incquerylabs.examples.cps.performance.tests.config.scenarios.ScenarioIdentifier
+import eu.mondo.sam.core.BenchmarkEngine
+import eu.mondo.sam.core.metrics.MemoryMetric
+import eu.mondo.sam.core.results.JsonSerializer
 import eu.mondo.sam.core.scenarios.BenchmarkScenario
 import java.io.File
 import java.util.Random
@@ -28,6 +31,8 @@ import org.eclipse.equinox.app.IApplication
 import org.eclipse.equinox.app.IApplicationContext
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
 import org.eclipse.xtend.lib.annotations.Data
+
+import static eu.mondo.sam.core.metrics.MemoryMetric.*
 
 /** 
  * This class controls all aspects of the application's execution
@@ -45,9 +50,7 @@ class Application implements IApplication {
 	val static TRANSFORMATION_TYPE_ARGUMENT = "-transformationType"
 	
 	extension Logger logger = Logger.getLogger("cps.testrunner")
-	/* (non-Javadoc)
-	 * @see IApplication#start(org.eclipse.equinox.app.IApplicationContext)
-	 */
+
 	override Object start(IApplicationContext context) throws Exception {
 		info("************ Test started ************")
 		val args = context.arguments.get(IApplicationContext.APPLICATION_ARGS) as String[]
@@ -183,42 +186,50 @@ class Application implements IApplication {
 		if(!resultsFolder.exists){
 			resultsFolder.mkdirs
 		}
+		ScenarioBenchmarkingBase.printVQRevision(resultsFolderPath)
+		
 		runTest(arguments, resultsFolderPath)
 	}
 
 	def runTest(BenchmarkArguments arguments, String resultsFolder) {
 		
+		val RANDOM_SEED = 11111
+		
 		// init class
 		info("************ Start class init")
-		ScenarioBenchmarkingBase.callGCBefore()
+		ScenarioBenchmarkingBase.callGC()
 		
 		// init instance
 		info("************ Start instance init")
-		val builder = CPSBenchmarkBuilder.create => [
-			it.scenario = arguments.scenario
-			it.scale = arguments.scale
-			it.wrapperType = arguments.transformationType
-			it.generatorType = arguments.generatorType
-		]
-		val benchmark = builder.build
-		benchmark.cleanupBefore()
+		
+		// communication unit between the phases
+		val CPSDataToken token = new CPSDataToken
+		token.scenarioName = arguments.scenario.class.simpleName
+		token.instancesDirPath = arguments.resultsFolderPath + "/models/"
+		token.seed = RANDOM_SEED
+		token.size = arguments.scale
+		// TODO xform and generator scenario specific!
+		token.xform = arguments.transformationType.wrapper
+		token.generatorType = arguments.generatorType
+		
+		val engine = new BenchmarkEngine
+		JsonSerializer::setResultPath(resultsFolder)
+		MemoryMetric.numberOfGC = 5
 		
 		// run test
 		info("************ Run test")
-		benchmark.completeToolchainIntegrationTest(resultsFolder)
+		engine.runBenchmark(arguments.scenario, token)
 		
 		// clean instance
 		info("************ Start instance clean")
-		benchmark.cleanup()
+		// TODO xform scenario specific!
+		token.xform.cleanupTransformation()
 		
 		// clean class
 		info("************ Start class clean")
 		ScenarioBenchmarkingBase.callGC()
 	}
 
-	/* (non-Javadoc)
-	 * @see IApplication#stop()
-	 */
 	override void stop() {
 		// nothing to do
 	}
