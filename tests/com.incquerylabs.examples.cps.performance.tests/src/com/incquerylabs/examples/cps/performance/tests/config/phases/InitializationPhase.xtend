@@ -13,21 +13,34 @@ package com.incquerylabs.examples.cps.performance.tests.config.phases
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
+import com.incquerylabs.examples.cps.performance.tests.config.metrics.PeakMemoryMetric
+import com.incquerylabs.examples.cps.performance.tests.config.metrics.AverageMemoryMetric
 
 class InitializationPhase extends CPSBenchmarkPhase {
 	
 	new(String name) {
-		super(name, false)
+		super(name, true)
 	}
 	
 	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
+		// prepare metrics
+		val peakMetric = new PeakMemoryMetric("PeakMemory")
+		val averageMetric = new AverageMemoryMetric("AverageMemory", AVERAGE_MEMORY_INTERVAL)
+		averageMetric.startMeasurement
+		peakMetric.reset
 		timer.startMeasure
 		
+		// do computation
 		cpsToken.xform.initializeTransformation(cpsToken.cps2dep)
 		
+		// measure metrics
 		timer.stopMeasure
-		return emptySet
+		averageMetric.stopMeasurement
+		peakMetric.measure
+		memory.measure
+		
+		return #{peakMetric, averageMetric}
 	}
 	
 }

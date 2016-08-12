@@ -12,6 +12,8 @@ import eu.mondo.sam.core.metrics.BenchmarkMetric
 abstract class CPSBenchmarkPhase extends AtomicPhase {
 	
 	boolean memoryMeasuredInPhase
+	// 1 second
+	protected static val int AVERAGE_MEMORY_INTERVAL = 1000 
 	
 	new(String phaseName, boolean measuresMemory) {
 		super(phaseName)

@@ -12,9 +12,10 @@
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
+import com.incquerylabs.examples.cps.performance.tests.config.metrics.AverageMemoryMetric
+import com.incquerylabs.examples.cps.performance.tests.config.metrics.PeakMemoryMetric
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
-import com.incquerylabs.examples.cps.performance.tests.config.metrics.PeakMemoryMetric
 
 class M2MTransformationPhase extends CPSBenchmarkPhase {
 	
@@ -24,17 +25,23 @@ class M2MTransformationPhase extends CPSBenchmarkPhase {
 	
 	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 		
+		// prepare metrics
 		val peakMetric = new PeakMemoryMetric("PeakMemory")
+		val averageMetric = new AverageMemoryMetric("AverageMemory", AVERAGE_MEMORY_INTERVAL)
+		averageMetric.startMeasurement
 		peakMetric.reset
-		
 		timer.startMeasure
 		
+		// do computation
 		cpsToken.xform.executeTransformation
 		
+		// measure metrics
 		timer.stopMeasure
+		averageMetric.stopMeasurement
 		peakMetric.measure
 		memory.measure
-		return #{peakMetric}
+		
+		return #{peakMetric, averageMetric}
 	}
 	
 }
