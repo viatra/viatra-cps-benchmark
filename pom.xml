@@ -23,7 +23,7 @@
 		<tycho.version>0.24.0</tycho.version>
 		<xtend.compiler.version>2.10.0</xtend.compiler.version>
 		<viatra.repository.url>http://download.eclipse.org/viatra/updates/integration</viatra.repository.url>
-		<viatra.compiler.version>1.3.0-SNAPSHOT</viatra.compiler.version>
+		<viatra.compiler.version>1.4.0-SNAPSHOT</viatra.compiler.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
