@@ -16,7 +16,7 @@ import eu.mondo.sam.core.scenarios.BenchmarkScenario
 import com.incquerylabs.examples.cps.performance.tests.config.cases.BenchmarkCase
 
 abstract class CPSBenchmarkScenario extends BenchmarkScenario {
-	protected BenchmarkCase benchmarkCase;
+	public BenchmarkCase benchmarkCase;
 	
 	new(BenchmarkCase benchmarkCase) {
 		this.benchmarkCase = benchmarkCase

@@ -15,12 +15,12 @@ import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import com.incquerylabs.examples.cps.performance.tests.config.cases.CaseFactory
 import com.incquerylabs.examples.cps.performance.tests.config.cases.CaseIdentifier
+import com.incquerylabs.examples.cps.performance.tests.config.scenarios.CPSBenchmarkScenario
 import com.incquerylabs.examples.cps.performance.tests.config.scenarios.ScenarioFactory
 import com.incquerylabs.examples.cps.performance.tests.config.scenarios.ScenarioIdentifier
 import eu.mondo.sam.core.BenchmarkEngine
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.results.JsonSerializer
-import eu.mondo.sam.core.scenarios.BenchmarkScenario
 import java.io.File
 import java.util.Random
 import org.apache.log4j.FileAppender
@@ -169,6 +169,12 @@ class Application implements IApplication {
 		if(!warmupFolder.exists){
 			warmupFolder.mkdirs
 		}
+		
+		val bcase = arguments.scenario.benchmarkCase
+		val scale = bcase.scale
+		
+		bcase.scale = 1
+		
 		val warmupArguments = new BenchmarkArguments(
 			arguments.scenario,
 			arguments.transformationType,
@@ -178,6 +184,8 @@ class Application implements IApplication {
 		)
 			
 		runTest(warmupArguments, warmupFolderPath)
+		
+		bcase.scale = scale
 	}
 	
 	def runBenchmark(BenchmarkArguments arguments) {
@@ -248,7 +256,7 @@ class Application implements IApplication {
 @Data
 class BenchmarkArguments {
 	
-	BenchmarkScenario scenario
+	CPSBenchmarkScenario scenario
 	TransformationType transformationType
 	GeneratorType generatorType
 	int scale
