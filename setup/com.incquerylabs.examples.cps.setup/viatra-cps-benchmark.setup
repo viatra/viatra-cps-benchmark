@@ -97,6 +97,8 @@
     <requirement
         name="org.eclipse.viatra.integration.mwe2.feature.feature.group"
         versionRange="[0.13.0,0.15.0)"/>
+    <requirement
+        name="org.eclipse.emf.sdk.feature.group"/>
     <repository
         url="http://download.eclipse.org/viatra/dependency"/>
     <repository
