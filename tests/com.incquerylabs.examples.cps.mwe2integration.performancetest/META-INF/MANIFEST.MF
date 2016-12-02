@@ -15,7 +15,7 @@ Require-Bundle: org.junit,
  org.eclipse.viatra.examples.cps.xform.serializer.javaio,
  org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.mwe2integration.example;bundle-version="0.1.0",
- org.eclipse.viatra.integration.mwe2;bundle-version="[0.13.0,0.15.0)",
+ org.eclipse.viatra.integration.mwe2;bundle-version="[0.13.0,0.16.0)",
  org.eclipse.viatra.transformation.evm,
  eu.mondo.sam.bundle;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
