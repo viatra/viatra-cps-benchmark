@@ -55,8 +55,8 @@ class ScenarioBenchmarkingBase extends CPSTestBase {
 	   val version = vqBundle.version.toString
 	   val scmRevision = vqBundle.getHeaders().get("SCM-Revision")
 	   val props = new Properties;
-	   props.put("viatra.query.version", version);
-	   props.put("viatra.query.revision", scmRevision);
+	   props.put("viatra.query.version", version ?: "unavailable");
+	   props.put("viatra.query.revision", scmRevision ?: "unavailable");
 	   val file = new File(jsonResultFolder+File.separatorChar+"artifact.revision.properties");
 	   try{
 	       val out = new FileOutputStream(file)
