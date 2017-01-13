@@ -20,6 +20,7 @@ import org.eclipse.viatra.examples.cps.xform.m2t.api.ICPSGenerator
 import org.eclipse.viatra.examples.cps.xform.m2t.monitor.DeploymentChangeMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.apache.log4j.Logger
+import org.eclipse.emf.common.util.URI
 
 @Accessors
 class CPSDataToken implements DataToken{
@@ -28,7 +29,7 @@ class CPSDataToken implements DataToken{
 	TransformationType transformationType
 	String scenarioName
 	CPSToDeployment cps2dep
-	String instancesDirPath
+	URI instancesDirURI
 	DeploymentChangeMonitor changeMonitor
 	ICPSGenerator codeGenerator 
 	IFolder srcFolder

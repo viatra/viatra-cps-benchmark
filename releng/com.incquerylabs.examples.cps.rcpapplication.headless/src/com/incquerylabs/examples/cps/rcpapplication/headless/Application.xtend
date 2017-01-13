@@ -33,6 +33,7 @@ import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationTy
 import org.eclipse.xtend.lib.annotations.Data
 
 import static eu.mondo.sam.core.metrics.MemoryMetric.*
+import org.eclipse.emf.common.util.URI
 
 /** 
  * This class controls all aspects of the application's execution
@@ -213,7 +214,7 @@ class Application implements IApplication {
 		// communication unit between the phases
 		val CPSDataToken token = new CPSDataToken
 		token.scenarioName = arguments.scenario.class.simpleName
-		token.instancesDirPath = arguments.resultsFolderPath + "/models/"
+		token.instancesDirURI = URI.createFileURI(arguments.resultsFolderPath).appendSegment("models") 
 		token.seed = RANDOM_SEED
 		token.size = arguments.scale
 		// TODO xform and generator scenario specific!

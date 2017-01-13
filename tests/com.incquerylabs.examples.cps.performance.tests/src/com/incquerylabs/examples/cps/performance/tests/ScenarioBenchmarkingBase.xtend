@@ -31,6 +31,7 @@ import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
+import org.eclipse.emf.common.util.URI
 
 class ScenarioBenchmarkingBase extends CPSTestBase {
 	protected extension CPSTransformationWrapper xform
@@ -72,7 +73,7 @@ class ScenarioBenchmarkingBase extends CPSTestBase {
 		// communication unit between the phases
 		val CPSDataToken token = new CPSDataToken
 		token.scenarioName = scenario.class.simpleName
-		token.instancesDirPath = instancesDirPath
+		token.instancesDirURI = URI.createURI(instancesDirPath)
 		token.seed = RANDOM_SEED
 		token.size = scale
 		token.xform = xform

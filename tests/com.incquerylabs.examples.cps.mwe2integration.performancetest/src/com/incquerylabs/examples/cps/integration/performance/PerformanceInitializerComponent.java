@@ -12,6 +12,7 @@ package com.incquerylabs.examples.cps.integration.performance;
 
 import java.io.File;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
@@ -60,7 +61,7 @@ public class PerformanceInitializerComponent extends InitializerComponent {
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION,
                 new XMIResourceFactoryImpl());
 
-        CPSToDeployment cps2dep = modelBuilderUtil.preparePersistedCPSModel(getModelDir() + "/" + getModelName(), getModelName());
+        CPSToDeployment cps2dep = modelBuilderUtil.preparePersistedCPSModel(URI.createFileURI(getModelDir()), getModelName());
         
         ////////////////////////////////////
         //////   Generation phase

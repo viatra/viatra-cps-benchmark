@@ -36,7 +36,7 @@ class EMFResourceInitializationPhase extends CPSBenchmarkPhase{
 		
 		timer.startMeasure
 		
-		cpsToken.cps2dep = preparePersistedCPSModel(cpsToken.instancesDirPath + "/" + cpsToken.scenarioName,
+		cpsToken.cps2dep = preparePersistedCPSModel(cpsToken.instancesDirURI.appendSegment(cpsToken.scenarioName),
 			cpsToken.xform.class.simpleName + cpsToken.size + "_" + System.nanoTime)
 		
 		timer.stopMeasure
