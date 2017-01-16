@@ -29,6 +29,9 @@ class ScenarioFactory {
 			case M2M_ONLY: {
 				new BasicXformScenario(benchmarkCase)
 			}
+			case M2M_PERSIST: {
+				new XformPersistScenario(benchmarkCase)
+			}
 			case QUERY: {
 				throw new UnsupportedOperationException("Query scenario not yet implemented")
 			}
@@ -44,5 +47,6 @@ enum ScenarioIdentifier {
 	TOOLCHAIN_BATCH,
 	TOOLCHAIN_INCREMENTAL,
 	M2M_ONLY,
+	M2M_PERSIST,
 	QUERY
 }
