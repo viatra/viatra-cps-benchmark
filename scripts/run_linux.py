@@ -33,7 +33,7 @@ def runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC):
     shutil.rmtree("workspace", ignore_errors=True)
     print("Running test SCENARIO: ", scenario, ", CASE: ", case, ", XFORM: ", trafoType, ", GENERATOR: ", genType, ", SCALE: ", str(scale), "TIMEOUT: ", str(timeoutC), ", RUN: ", str(runIndex))
     param = flatten(["-scenario", scenario, "-case", case, "-transformationType", trafoType, "-scale", str(scale), "-generatorType", genType, "-runIndex", str(runIndex)])
-    print(flatten(["eclipse/eclipse", param]))
+    print("Command: eclipse/eclipse"," ".join(param))
     p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
     pid = p.pid
     try:
