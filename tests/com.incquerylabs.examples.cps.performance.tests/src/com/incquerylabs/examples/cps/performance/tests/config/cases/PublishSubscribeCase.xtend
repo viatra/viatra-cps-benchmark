@@ -14,6 +14,8 @@ package com.incquerylabs.examples.cps.performance.tests.config.cases
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
+import com.incquerylabs.examples.cps.performance.tests.config.phases.AddAppInstanceModificationPhase
+import com.incquerylabs.examples.cps.performance.tests.config.phases.GenerationPhase
 import java.util.Random
 import org.apache.log4j.Logger
 import org.eclipse.viatra.examples.cps.generator.dtos.AppClass
@@ -22,8 +24,6 @@ import org.eclipse.viatra.examples.cps.generator.dtos.HostClass
 import org.eclipse.viatra.examples.cps.generator.dtos.MinMaxData
 import org.eclipse.viatra.examples.cps.generator.dtos.Percentage
 import org.eclipse.viatra.examples.cps.generator.utils.RandomUtils
-import com.incquerylabs.examples.cps.performance.tests.config.phases.EmptyPhase
-import com.incquerylabs.examples.cps.performance.tests.config.phases.GenerationPhase
 
 class PublishSubscribeCase extends BenchmarkCase {
 	protected extension Logger logger = Logger.getLogger("cps.performance.tests.config.cases.PublishSubscribeCase")
@@ -43,7 +43,7 @@ class PublishSubscribeCase extends BenchmarkCase {
 	}
 	
 	override getModificationPhase(String name) {
-		return new EmptyPhase(name)
+		return new AddAppInstanceModificationPhase(name, "ClientAppClass", "client")
 	}
 	
 	def getConstraints() {
