@@ -11,9 +11,12 @@
 
 package com.incquerylabs.examples.cps.performance.tests.benchmarks
 
+import com.incquerylabs.examples.cps.performance.tests.config.cases.ClientServerCase
+import java.io.File
 import java.util.Random
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.core.runtime.Platform
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.viatra.examples.cps.cyberPhysicalSystem.CyberPhysicalSystemFactory
@@ -21,8 +24,6 @@ import org.eclipse.viatra.examples.cps.deployment.DeploymentFactory
 import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput
-import org.eclipse.viatra.examples.cps.generator.queries.Validation
-import com.incquerylabs.examples.cps.performance.tests.config.cases.ClientServerCase
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor
 import org.eclipse.viatra.examples.cps.traceability.TraceabilityFactory
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.CPS2DepTest
@@ -32,19 +33,14 @@ import org.eclipse.viatra.examples.cps.xform.m2t.api.DefaultM2TOutputProvider
 import org.eclipse.viatra.examples.cps.xform.m2t.distributed.CodeGenerator
 import org.eclipse.viatra.examples.cps.xform.m2t.monitor.DeploymentChangeMonitor
 import org.eclipse.viatra.examples.cps.xform.serializer.DefaultSerializer
+import org.eclipse.viatra.examples.cps.xform.serializer.IFileAccessor
 import org.eclipse.viatra.examples.cps.xform.serializer.eclipse.EclipseBasedFileAccessor
-import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
+import org.eclipse.viatra.examples.cps.xform.serializer.javaio.JavaIOBasedFileAccessor
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import org.eclipse.core.runtime.Platform
-import org.eclipse.viatra.examples.cps.xform.serializer.IFileAccessor
-import org.eclipse.viatra.examples.cps.deployment.Deployment
-import org.eclipse.viatra.examples.cps.xform.m2t.api.ICPSGenerator
-import org.eclipse.viatra.examples.cps.xform.serializer.javaio.JavaIOBasedFileAccessor
-import java.io.File
 
 /**
  * Tests the whole toolchain using each transformation one-by-one
@@ -101,11 +97,6 @@ class CPSDemonstratorIntegrationTest extends CPS2DepTest {
 		
 		// Generating
 		var fragment = generator.process(plan, input);
-
-		val engine = AdvancedViatraQueryEngine.from(fragment.engine);
-		
-		Validation.instance.prepare(engine);
-
 
 		cps2dep.initializeTransformation
 

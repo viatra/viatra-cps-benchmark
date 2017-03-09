@@ -20,14 +20,12 @@ import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder;
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment;
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput;
 import org.eclipse.viatra.examples.cps.generator.dtos.GeneratorPlan;
-import org.eclipse.viatra.examples.cps.generator.queries.Validation;
 import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil;
 import org.eclipse.viatra.examples.cps.integration.InitializerComponent;
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor;
 import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment;
 import org.eclipse.viatra.examples.cps.xform.serializer.DefaultSerializer;
 import org.eclipse.viatra.examples.cps.xform.serializer.javaio.JavaIOBasedFileAccessor;
-import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import eu.mondo.sam.core.metrics.MemoryMetric;
 import eu.mondo.sam.core.metrics.TimeMetric;
@@ -75,27 +73,17 @@ public class PerformanceInitializerComponent extends InitializerComponent {
         }
         
         
-        try {
-
-            CPSGeneratorInput input = new CPSGeneratorInput(getSeed(), getConstraints(getModelSize()), cps2dep.getCps());
-            GeneratorPlan plan = CPSPlanBuilder.buildCharacteristicBasedPlan();
-            PlanExecutor<CPSFragment, CPSGeneratorInput> generator = new PlanExecutor<CPSFragment, CPSGeneratorInput>();
-            
-            generatorTimer.startMeasure();
-            CPSFragment fragment = generator.process(plan, input);
-            generatorTimer.stopMeasure();
-            generatorMemory.measure();
-            
-            Validation.instance().prepare(fragment.getEngine());
-
-            fragment.getEngine().dispose();
-            
-            generatorResult.addMetrics(generatorTimer, generatorMemory);
-            
-
-        } catch (ViatraQueryException e) {
-            e.printStackTrace();
-        }
+        CPSGeneratorInput input = new CPSGeneratorInput(getSeed(), getConstraints(getModelSize()), cps2dep.getCps());
+        GeneratorPlan plan = CPSPlanBuilder.buildCharacteristicBasedPlan();
+        PlanExecutor<CPSFragment, CPSGeneratorInput> generator = new PlanExecutor<CPSFragment, CPSGeneratorInput>();
+        
+        generatorTimer.startMeasure();
+        CPSFragment fragment = generator.process(plan, input);
+        generatorTimer.stopMeasure();
+        generatorMemory.measure();
+        fragment.getEngine().dispose();
+        
+        generatorResult.addMetrics(generatorTimer, generatorMemory);
 
         serializer.createProject(getOutputProjectLocation(), getOutputProjectName(), new JavaIOBasedFileAccessor());
         File project = new File(getOutputProjectLocation(), getOutputProjectName());

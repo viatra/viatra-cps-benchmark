@@ -18,7 +18,6 @@ import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput
 import org.eclipse.viatra.examples.cps.generator.interfaces.ICPSConstraints
-import org.eclipse.viatra.examples.cps.generator.queries.Validation
 import org.eclipse.viatra.examples.cps.generator.utils.StatsUtil
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor
 
@@ -45,7 +44,6 @@ class GenerationPhase extends CPSBenchmarkPhase {
 		timer.stopMeasure
 		memory.measure
 		
-		Validation.instance.prepare(fragment.engine);
 		val cpsStats = StatsUtil.generateStatsForCPS(fragment.engine, fragment.modelRoot)
 		cpsStats.log
 		fragment.engine.dispose

@@ -13,6 +13,7 @@ package com.incquerylabs.examples.cps.performance.tests.queries
 
 import com.google.common.base.Stopwatch
 import com.google.common.collect.Maps
+import com.incquerylabs.examples.cps.performance.tests.config.cases.LowSynchCase
 import java.util.Map
 import java.util.Random
 import java.util.concurrent.TimeUnit
@@ -20,13 +21,11 @@ import org.apache.log4j.Logger
 import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput
-import org.eclipse.viatra.examples.cps.generator.queries.Validation
+import org.eclipse.viatra.examples.cps.generator.queries.Queries
 import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil
 import org.eclipse.viatra.examples.cps.generator.utils.StatsUtil
-import com.incquerylabs.examples.cps.performance.tests.config.cases.StatisticBasedCase
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor
 import org.eclipse.viatra.examples.cps.tests.util.CPSTestBase
-import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.patterns.CpsXformM2M
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.GenericQueryGroup
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
@@ -46,10 +45,11 @@ class QueryRegressionTest extends CPSTestBase{
 	public def prepare() {
 		info("Preparing query performance test")
 		
-		val rs = executeScenarioXformForConstraints(16)
+		val rs = executeScenarioXformForConstraints(256)
 		incQueryEngine = AdvancedViatraQueryEngine.createUnmanagedEngine(new EMFScope(rs))
 		queryGroup = GenericQueryGroup.of(
-			CpsXformM2M.instance
+//			CpsXformM2M.instance
+            Queries.instance
 		)
 		queryGroup.prepare(incQueryEngine)
 		debug("Base index created")
@@ -62,7 +62,8 @@ class QueryRegressionTest extends CPSTestBase{
 	def executeScenarioXformForConstraints(int size) {	
 		val seed = 11111
 		val Random rand = new Random(seed)
-		val StatisticBasedCase benchmarkCase = new StatisticBasedCase(size, rand)
+//		val StatisticBasedCase benchmarkCase = new StatisticBasedCase(size, rand)
+		val LowSynchCase benchmarkCase = new LowSynchCase(size, rand)
 		val constraints = benchmarkCase.getConstraints()
 		val cps2dep = prepareEmptyModel("testModel"+System.nanoTime)
 		
@@ -77,7 +78,6 @@ class QueryRegressionTest extends CPSTestBase{
 		info("Generating time: " + generateTime.elapsed(TimeUnit.MILLISECONDS) + " ms")
 		
 		val engine = AdvancedViatraQueryEngine.from(fragment.engine);
-		Validation.instance.prepare(engine);
 		
 		StatsUtil.generateStatsForCPS(engine, fragment.modelRoot).log
 		
