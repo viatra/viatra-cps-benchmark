@@ -24,7 +24,7 @@ def runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC):
     param = flatten(["-scenario", scenario, "-case", case, "-transformationType", trafoType, "-scale", str(scale), "-generatorType", genType, "-runIndex", str(runIndex)])
     print("Command: eclipse\eclipse.exe"," ".join(param))
     try:
-        subprocess.call(flatten(["eclipse\eclipse.exe", param]), timeout=CONST_TIMEOUT)
+        subprocess.check_call(flatten(["eclipse\eclipse.exe", param]), timeout=CONST_TIMEOUT)
     except TimeoutExpired:
         print(" >> Timed out after ", CONST_TIMEOUT, "s, continuing with the next transformation type.")
         return False

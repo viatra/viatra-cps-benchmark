@@ -37,7 +37,10 @@ def runBenchmark(scenario, case, genType, trafoType, scale, runIndex, timeoutC):
     p = subprocess.Popen(flatten(["eclipse/eclipse", param]))
     pid = p.pid
     try:
-        p.wait(timeout=timeoutC)
+        ret = p.wait(timeout=timeoutC)
+        if ret != 0:
+            print(" >> Non-zero exit code ", ret, ", continuing with the next transformation type.")
+            return False
     except TimeoutExpired:
         print(" >> Timed out after ", timeoutC, "s, continuing with the next transformation type.")
         kill_children(pid)
