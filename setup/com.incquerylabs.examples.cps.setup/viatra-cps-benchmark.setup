@@ -75,7 +75,7 @@
         versionRange="[1.2.0,2.0.0]"/>
     <requirement
         name="org.eclipse.viatra.addon.viewers.tooling.feature.feature.group"
-        versionRange="[0.14.0,0.15.0)"/>
+        versionRange="[0.14.0,0.17.0)"/>
     <requirement
         name="org.eclipse.xtext.sdk.feature.group"
         versionRange="[2.10.0,2.11.0)"/>
@@ -96,7 +96,7 @@
         versionRange="[1.2.0,2.0.0)"/>
     <requirement
         name="org.eclipse.viatra.integration.mwe2.feature.feature.group"
-        versionRange="[0.13.0,0.15.0)"/>
+        versionRange="[0.13.0,0.17.0)"/>
     <requirement
         name="org.eclipse.emf.sdk.feature.group"/>
     <repository
