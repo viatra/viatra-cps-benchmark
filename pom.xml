@@ -20,10 +20,13 @@
 		<module>releng/com.incquerylabs.examples.cps.rcpapplication.headless</module>
 	</modules>
 	<properties>
-		<tycho.version>0.24.0</tycho.version>
+		<tycho.version>1.0.0</tycho.version>
 		<xtend.compiler.version>2.10.0</xtend.compiler.version>
 		<viatra.repository.url>http://download.eclipse.org/viatra/updates/integration</viatra.repository.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.7</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
 	<build>
 		<plugins>
@@ -41,6 +44,9 @@
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<plugin>
+                <artifactId>maven-toolchains-plugin</artifactId>
+            </plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -116,6 +122,39 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+			 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-toolchains-plugin</artifactId>
+                    <version>1.1</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>toolchain</goal>
+                            </goals>
+                            <configuration>
+                             <toolchains>
+                                 <jdk>
+                                     <id>JavaSE-${java.version}</id>
+                                 </jdk>
+                             </toolchains>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                 <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-compiler-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <useJDK>BREE</useJDK>
+                        <useProjectSettings>true</useProjectSettings>
+                        <excludeResources>
+                            <excludeResource>**/.gitignore</excludeResource>
+                        </excludeResources>
+                    </configuration>
+                </plugin>
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
