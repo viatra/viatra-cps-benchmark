@@ -1,0 +1,19 @@
+{
+  "benchmark": [
+    {
+      "scenario" : "M2M_ONLY",
+      "cases" : [
+        "STATISTICS_BASED"
+      ],
+      "transformation_types": [
+        "BATCH_VIATRA_QUERY_RETE"
+      ],
+      "generator_types": [
+        "TEMPLATE"
+      ],
+      "scales": [32,64],
+      "timeout": 1000,
+      "runs": 3
+    }
+  ]
+}
