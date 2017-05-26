@@ -16,7 +16,7 @@
       "Y_Label": "",
       "X_Axis_Scale": "log2",
       "Y_Axis_Scale": "log2",
-      "Show_Values": false,
+      "Show_Values": true,
       "Draw_Lines": true,
       "Legend_Position": "right",
       "Legend_Direction": "vertical",
