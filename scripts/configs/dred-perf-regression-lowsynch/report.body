@@ -1,0 +1,70 @@
+</pre>
+<h3>Generated diagrams (click image for PDF version)</h3>
+<h4>Runtime measurements</h4>
+<div>
+  <p>
+    <b>Runtime of initialization and first M2M phase</b>
+    <br>
+    <a href="diagrams/init_m2m_time.pdf"><img src="diagrams/init_m2m_time.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Runtime of model modification and M2M phase</b>
+    <br>
+    <a href="diagrams/modify_m2m_time.pdf"><img src="diagrams/modify_m2m_time.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Full workflow time</b>
+    <br>
+    <a href="diagrams/full_workflow_time.pdf"><img src="diagrams/full_workflow_time.png" width="1024px"></a>
+  </p>
+</div>
+<h4>Memory measurements</h4>
+<div>
+  <p>
+    <b>Memory usage after initialization phase</b>
+    <br>
+    <a href="diagrams/init_memory.pdf"><img src="diagrams/init_memory.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Average memory usage during initialization phase</b>
+    <br>
+    <a href="diagrams/init_average_memory.pdf"><img src="diagrams/init_average_memory.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Peak memory usage during initialization phase</b>
+    <br>
+    <a href="diagrams/init_peak_memory.pdf"><img src="diagrams/init_peak_memory.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Memory usage after M2M phase</b>
+    <br>
+    <a href="diagrams/m2m_memory.pdf"><img src="diagrams/m2m_memory.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Average memory usage during M2M phase</b>
+    <br>
+    <a href="diagrams/m2m_average_memory.pdf"><img src="diagrams/m2m_average_memory.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Peak memory usage during M2M phase</b>
+    <br>
+    <a href="diagrams/m2m_peak_memory.pdf"><img src="diagrams/m2m_peak_memory.png" width="1024px"></a>
+  </p>
+</div>
+
+</body>
+</html>
