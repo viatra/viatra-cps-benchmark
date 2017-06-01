@@ -1,10 +1,11 @@
 #!/bin/bash
-cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
 #$1=${BENCHMARK_CONFIG}
 #$2=${BUILD_ID}-build${BUILD_NUMBER}
-resultFolder=$2
+timestamp=$(date +"%Y%m%d%H%M")
+resultFolder=${timestamp}-$2
 resultPath=viatra-cps-benchmark-results/$1/$resultFolder
+commitResults=$3
 
 # Clone results repository if needed
 if [ -d "viatra-cps-benchmark-results" ]; then
@@ -24,10 +25,16 @@ mkdir -p $resultPath
 # Copy results to new folder
 cp -R benchmark/results/* $resultPath
 cp benchmark/*.json $resultPath
-cp benchmark/*.properties $resultPath
+mv $resultPath/json/artifact.revision.properties $resultPath
 
-# Git commit (with add all) then push
-cd viatra-cps-benchmark-results
-git add $1/$resultFolder
-git commit -q -m "Add results for $resultFolder with config $1"
-git push origin
+if [ -z "$commitResults" ]; then
+  echo "Skipping commit and push"
+else
+  if [ "$commitResults" = "--push" ]; then
+    # Git commit (with add all) then push
+    cd viatra-cps-benchmark-results
+    git add $1/$resultFolder
+    git commit -q -m "Add results for $resultFolder with config $1"
+    git push origin
+  fi
+fi
