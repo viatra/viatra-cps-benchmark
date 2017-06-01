@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$( cd "$( dirname "$0" )" && pwd )/.."
 
 #$1=${BENCHMARK_CONFIG}
 #$2=${BUILD_ID}-build${BUILD_NUMBER}
