@@ -2,6 +2,13 @@
 <h3>Generated diagrams (click image for PDF version)</h3>
 <div>
   <p>
+    <b>Runtime of generation phase</b>
+    <br>
+    <a href="diagrams/generation_time.pdf"><img src="diagrams/generation_time.png" width="1024px"></a>
+  </p>
+</div>
+<div>
+  <p>
     <b>Runtime of initialization and first M2M phase</b>
     <br>
     <a href="diagrams/init_m2m_time.pdf"><img src="diagrams/init_m2m_time.png" width="1024px"></a>
