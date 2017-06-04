@@ -12,5 +12,5 @@ if [ -d "mondo-sam" ]; then
 else
   # Clone repo
   git clone git@github.com:FTSRG/mondo-sam.git mondo-sam
-  git checkout origin/0.1-maintenance
+  git checkout 0.1-maintenance
 fi
