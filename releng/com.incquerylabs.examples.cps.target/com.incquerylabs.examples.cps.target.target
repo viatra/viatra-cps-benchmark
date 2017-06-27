@@ -20,5 +20,9 @@
       <unit id="org.codehaus.jackson.mapper" version="1.6.0.v20101005-0925"/>
       <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
     </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.collections" version="8.2.0.v20170622-1916"/>
+      <repository location="http://download.eclipse.org/collections/8.2.0/repository/"/>
+    </location>
   </locations>
 </target>
