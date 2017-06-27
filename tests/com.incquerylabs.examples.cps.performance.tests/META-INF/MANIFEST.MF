@@ -26,5 +26,5 @@ Require-Bundle: org.eclipse.xtend.lib,
  eu.mondo.sam.bundle;bundle-version="0.1.0",
  org.eclipse.viatra.query.testing.core;bundle-version="1.5.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.9.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j;version="1.2.15"

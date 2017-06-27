@@ -10,6 +10,9 @@
   </parent>
   <artifactId>com.incquerylabs.examples.cps.performance.tests</artifactId>
   <packaging>eclipse-test-plugin</packaging>
+  <properties>
+      <java.version>1.8</java.version>
+  </properties>
   <build>
 		<plugins>
 			<plugin>

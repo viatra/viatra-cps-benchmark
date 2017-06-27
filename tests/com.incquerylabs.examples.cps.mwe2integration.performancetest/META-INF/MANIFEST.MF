@@ -18,5 +18,5 @@ Require-Bundle: org.junit,
  org.eclipse.viatra.integration.mwe2;bundle-version="[0.13.0,0.18.0)",
  org.eclipse.viatra.transformation.evm,
  eu.mondo.sam.bundle;bundle-version="0.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j
