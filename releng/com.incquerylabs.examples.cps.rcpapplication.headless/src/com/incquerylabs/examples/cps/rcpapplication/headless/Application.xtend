@@ -29,7 +29,7 @@ import org.apache.log4j.Logger
 import org.apache.log4j.PatternLayout
 import org.eclipse.equinox.app.IApplication
 import org.eclipse.equinox.app.IApplicationContext
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.TransformationType
 import org.eclipse.xtend.lib.annotations.Data
 
 import static eu.mondo.sam.core.metrics.MemoryMetric.*

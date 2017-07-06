@@ -14,7 +14,7 @@ package com.incquerylabs.examples.cps.performance.tests.benchmarks
 import java.util.Random
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import com.incquerylabs.examples.cps.performance.tests.config.cases.AdvancedClientServerCase
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.TransformationType
 
 class BasicXformAdvancedClientServerTest extends com.incquerylabs.examples.cps.performance.tests.BasicXformTest {
 	

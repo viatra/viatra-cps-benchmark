@@ -27,7 +27,7 @@ import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor
 import org.eclipse.viatra.examples.cps.traceability.TraceabilityFactory
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.CPS2DepTest
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.CPSTransformationWrapper
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.CPSTransformationWrapper
 import org.eclipse.viatra.examples.cps.xform.m2t.api.ChangeM2TOutputProvider
 import org.eclipse.viatra.examples.cps.xform.m2t.api.DefaultM2TOutputProvider
 import org.eclipse.viatra.examples.cps.xform.m2t.distributed.CodeGenerator

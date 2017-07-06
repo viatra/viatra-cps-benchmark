@@ -14,7 +14,7 @@ package com.incquerylabs.examples.cps.performance.tests
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import eu.mondo.sam.core.scenarios.BenchmarkScenario
 import java.util.Random
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.TransformationType
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
