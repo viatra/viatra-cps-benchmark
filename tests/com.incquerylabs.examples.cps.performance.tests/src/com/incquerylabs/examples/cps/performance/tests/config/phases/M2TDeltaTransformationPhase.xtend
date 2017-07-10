@@ -34,13 +34,12 @@ class M2TDeltaTransformationPhase extends CPSBenchmarkPhase {
 		val monitor = cpsToken.changeMonitor
 		val generator = cpsToken.codeGenerator
 		val folder = cpsToken.srcFolder
-		val folderString = if(folder != null){
+		val folderString = if(folder !== null){
 			folder.location.toOSString
 		} else {
 			cpsToken.folderPath
 		}
-		val delta = monitor.deltaSinceLastCheckpoint
-	
+		val delta = monitor.createCheckpoint
 		
 		val changeprovider = new ChangeM2TOutputProvider(delta, generator, folderString)
 		val fileAccessor = if(Platform.running){
