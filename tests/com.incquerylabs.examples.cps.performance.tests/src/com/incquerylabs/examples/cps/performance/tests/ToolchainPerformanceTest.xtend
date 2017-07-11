@@ -16,7 +16,7 @@ import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import com.incquerylabs.examples.cps.performance.tests.config.cases.BenchmarkCase
 import com.incquerylabs.examples.cps.performance.tests.config.scenarios.ToolChainPerformanceBatchScenario
 import com.incquerylabs.examples.cps.performance.tests.config.scenarios.ToolChainPerformanceIncrementalScenario
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.TransformationType
 
 abstract class ToolchainPerformanceTest extends PropertiesBasedTest {
 	

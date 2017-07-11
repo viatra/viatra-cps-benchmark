@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableSet
 import com.google.common.collect.Sets
 import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import org.eclipse.viatra.examples.cps.tests.util.PropertiesUtil
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.TransformationType
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.TransformationType
 import org.junit.runners.Parameterized.Parameters
 
 abstract class PropertiesBasedTest extends CPSPerformanceTest {

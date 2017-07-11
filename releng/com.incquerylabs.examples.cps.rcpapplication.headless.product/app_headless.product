@@ -95,6 +95,7 @@
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.incr.expl"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.incr.qrt"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra"/>
+      <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.launcher"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.tests"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2m.util"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.m2t"/>

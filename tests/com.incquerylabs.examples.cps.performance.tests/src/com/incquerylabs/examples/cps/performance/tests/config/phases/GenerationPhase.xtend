@@ -17,7 +17,7 @@ import eu.mondo.sam.core.metrics.TimeMetric
 import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment
 import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput
-import org.eclipse.viatra.examples.cps.generator.interfaces.ICPSConstraints
+import org.eclipse.viatra.examples.cps.generator.dtos.constraints.ICPSConstraints
 import org.eclipse.viatra.examples.cps.generator.utils.StatsUtil
 import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor
 

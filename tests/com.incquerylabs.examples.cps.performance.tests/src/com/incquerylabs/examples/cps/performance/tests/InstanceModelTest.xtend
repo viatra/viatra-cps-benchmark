@@ -12,7 +12,7 @@
 package com.incquerylabs.examples.cps.performance.tests
 
 import org.eclipse.viatra.examples.cps.xform.m2m.tests.CPS2DepTest
-import org.eclipse.viatra.examples.cps.xform.m2m.tests.wrappers.CPSTransformationWrapper
+import org.eclipse.viatra.examples.cps.xform.m2m.launcher.CPSTransformationWrapper
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith

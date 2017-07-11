@@ -12,7 +12,7 @@
 package com.incquerylabs.examples.cps.performance.tests.config.phases
 
 import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder
-import org.eclipse.viatra.examples.cps.generator.interfaces.ICPSConstraints
+import org.eclipse.viatra.examples.cps.generator.dtos.constraints.ICPSConstraints
 
 class StatisticsBasedGenerationPhase extends GenerationPhase {
 
