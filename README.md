@@ -2,7 +2,7 @@
 
 Performance benchmark using the VIATRA CPS demonstrator
 
-[![Build Status](https://build.incquerylabs.com/jenkins/job/CPS-Demonstrator/badge/icon)](https://build.inf.mit.bme.hu/jenkins/job/CPS-Demonstrator/)
+[![Build Status](https://build.incquerylabs.com/jenkins/job/CPS-Demonstrator/badge/icon)](https://build.incquerylabs.com/jenkins/job/CPS-Demonstrator/)
 
 A comprehensive example showing off VIATRA features on a Cyber Physical System modeling domain.
 Includes:
