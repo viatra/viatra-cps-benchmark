@@ -14,6 +14,11 @@ package com.incquerylabs.examples.cps.performance.tests.config.phases
 import com.incquerylabs.examples.cps.performance.tests.config.CPSDataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
+import org.eclipse.core.resources.IWorkspace
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.runtime.ICoreRunnable
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.xform.m2t.api.ChangeM2TOutputProvider
 import org.eclipse.viatra.examples.cps.xform.serializer.DefaultSerializer
@@ -29,6 +34,11 @@ class M2TDeltaTransformationPhase extends CPSBenchmarkPhase {
 
 	override execute(CPSDataToken cpsToken, TimeMetric timer, MemoryMetric memory) {
 
+        val workspace = ResourcesPlugin.workspace
+        while(workspace.isTreeLocked){
+            Thread.sleep(1000);
+        }
+
 		timer.startMeasure
 
 		val monitor = cpsToken.changeMonitor
@@ -42,12 +52,18 @@ class M2TDeltaTransformationPhase extends CPSBenchmarkPhase {
 		val delta = monitor.createCheckpoint
 		
 		val changeprovider = new ChangeM2TOutputProvider(delta, generator, folderString)
-		val fileAccessor = if(Platform.running){
-			new EclipseBasedFileAccessor
+		if(Platform.running){
+			val fileAccessor = new EclipseBasedFileAccessor
+			val myRunnable = new ICoreRunnable() {
+                override run(IProgressMonitor monitor) throws CoreException {
+            		folderString.serialize(changeprovider, fileAccessor)
+                }
+            }
+            workspace.run(myRunnable, folder.project, IWorkspace.AVOID_UPDATE, null)
 		} else {
-			new JavaIOBasedFileAccessor
+			val fileAccessor = new JavaIOBasedFileAccessor
+    		folderString.serialize(changeprovider, fileAccessor)
 		}
-		folderString.serialize(changeprovider, fileAccessor)
 
 		timer.stopMeasure
 		memory.measure

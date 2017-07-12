@@ -34,6 +34,7 @@ import org.eclipse.xtend.lib.annotations.Data
 
 import static eu.mondo.sam.core.metrics.MemoryMetric.*
 import org.eclipse.emf.common.util.URI
+import org.apache.log4j.ConsoleAppender
 
 /** 
  * This class controls all aspects of the application's execution
@@ -43,6 +44,7 @@ class Application implements IApplication {
 	val static FILE_LOG_LAYOUT_PREFIX = "[%d{MMM/dd HH:mm:ss}] "
 	
 	val static CASE_ARGUMENT = "-case"
+	val static CONSOLELOG_ARGUMENT = "-logToEclipseConsole"
 	val static GENERATOR_TYPE_ARGUMENT = "-generatorType"
 	val static RESULTS_ARGUMENT = "-results"
 	val static RUN_INDEX_ARGUMENT = "-runIndex"
@@ -92,6 +94,10 @@ class Application implements IApplication {
 					argIndex++
 					params.put(CASE_ARGUMENT, args.get(argIndex))
 				}
+				case CONSOLELOG_ARGUMENT: {
+				    argIndex++
+					params.put(CONSOLELOG_ARGUMENT, "true")
+				}
 				case TRANSFORMATION_TYPE_ARGUMENT: {
 					argIndex++
 					params.put(TRANSFORMATION_TYPE_ARGUMENT, args.get(argIndex))
@@ -123,6 +129,7 @@ class Application implements IApplication {
 		val scale = Integer.parseInt(params.get(SCALE_ARGUMENT))
 		val generatorType = GeneratorType.valueOf(params.get(GENERATOR_TYPE_ARGUMENT))
 		val runIndex = Integer.parseInt(params.get(RUN_INDEX_ARGUMENT))
+		val consoleLog = Boolean.parseBoolean(params.get(CONSOLELOG_ARGUMENT))
 		
 		val random = new Random(ScenarioBenchmarkingBase.RANDOM_SEED);
 		
@@ -134,7 +141,7 @@ class Application implements IApplication {
 		val scenario = ScenarioFactory.create.createScenario(scenarioId, bcase, runIndex, tool)
 		
 		val resultsFolderPath = params.get(RESULTS_ARGUMENT)
-		val arguments = new BenchmarkArguments(scenario, trafoType, generatorType, scale, resultsFolderPath)
+		val arguments = new BenchmarkArguments(scenario, trafoType, generatorType, scale, resultsFolderPath, consoleLog)
 		
 		initLogger(arguments)
 		
@@ -160,6 +167,10 @@ class Application implements IApplication {
 		val rootLogger = Logger.rootLogger
 		rootLogger.removeAllAppenders
 		rootLogger.addAppender(fileAppender)
+		if(arguments.consoleLog){
+    		val consoleAppender = new ConsoleAppender(new PatternLayout(FILE_LOG_LAYOUT_PREFIX+COMMON_LAYOUT))
+    		rootLogger.addAppender(consoleAppender)
+		}
 		rootLogger.additivity = false
 		rootLogger.level = Level.INFO
 	}
@@ -181,7 +192,8 @@ class Application implements IApplication {
 			arguments.transformationType,
 			arguments.generatorType,
 			1,
-			arguments.resultsFolderPath
+			arguments.resultsFolderPath,
+			arguments.consoleLog
 		)
 			
 		runTest(warmupArguments, warmupFolderPath)
@@ -245,10 +257,11 @@ class Application implements IApplication {
 	
 	def printUsage() {
 		info('''
-			usage: eclipse -scenario <scenario> [scenario_arguments] [-results <resultsFolderPath>]
+			usage: eclipse -scenario <scenario> [scenario_arguments] [-results <resultsFolderPath>] [-logToEclipseConsole]
 				scenario: which benchmark scenario to run
 				scenario_arguments: optional arguments depending on scenario
 				resultsFolderPath: optional path for storing results (defaults to './results')
+				logToEclipseConsole: optional, if present the logger will output to Eclipse console (useful when debugging)
 		''')
 	}
 
@@ -262,5 +275,6 @@ class BenchmarkArguments {
 	GeneratorType generatorType
 	int scale
 	String resultsFolderPath
+	boolean consoleLog
 	
 }

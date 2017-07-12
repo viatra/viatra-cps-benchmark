@@ -16,7 +16,11 @@ import com.incquerylabs.examples.cps.performance.tests.config.GeneratorType
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
 import java.io.File
+import org.eclipse.core.resources.IWorkspace
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.runtime.ICoreRunnable
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.runtime.Platform
 import org.eclipse.viatra.examples.cps.xform.m2t.api.DefaultM2TOutputProvider
@@ -77,14 +81,16 @@ class M2TTransformationPhase extends CPSBenchmarkPhase {
 	}
 	
 	private def prepareEclipseBasedSerialization(String projectName, CPSDataToken cpsToken) {
+		val workspace = ResourcesPlugin.workspace
+
 		val fileAccessor = new EclipseBasedFileAccessor
 		createProject("",projectName, fileAccessor)
-		val project = ResourcesPlugin.workspace.root.getProject(projectName)
+		val project = workspace.root.getProject(projectName)
 		
-		// disable autobuilding of workspace
-		val description = ResourcesPlugin.getWorkspace().getDescription();
+		// disable auto-building of workspace
+		val description = workspace.getDescription();
         description.setAutoBuilding(false);
-        ResourcesPlugin.getWorkspace().setDescription(description);
+        workspace.setDescription(description);
         
 		val srcFolder = project.getFolder("src");
 		val folderString = srcFolder.location.toOSString
@@ -95,7 +101,13 @@ class M2TTransformationPhase extends CPSBenchmarkPhase {
 		}
 		srcFolder.members.forEach[delete(true, null)]
 		
-		performSerialization(cpsToken, folderString, fileAccessor)
+		val myRunnable = new ICoreRunnable() {
+            override run(IProgressMonitor monitor) throws CoreException {
+        		performSerialization(cpsToken, folderString, fileAccessor)
+            }
+        }
+		workspace.run(myRunnable, project, IWorkspace.AVOID_UPDATE, null)
+		
 	}
 	
 }
