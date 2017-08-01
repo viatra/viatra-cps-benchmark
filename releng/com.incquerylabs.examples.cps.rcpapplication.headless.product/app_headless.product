@@ -16,7 +16,6 @@
    <windowImages/>
 
    <launcher>
-      <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
@@ -29,13 +28,14 @@
    <plugins>
       <plugin id="com.google.guava"/>
       <plugin id="com.google.inject"/>
+      <plugin id="com.google.inject.assistedinject" fragment="true"/>
       <plugin id="com.google.inject.multibindings" fragment="true"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.incquerylabs.examples.cps.performance.tests"/>
       <plugin id="com.incquerylabs.examples.cps.rcpapplication.headless"/>
       <plugin id="eu.mondo.sam.bundle"/>
+      <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
-      <plugin id="javax.xml"/>
       <plugin id="org.antlr.runtime" version="3.2.0.v201101311130"/>
       <plugin id="org.apache.commons.cli"/>
       <plugin id="org.apache.commons.lang"/>
@@ -47,13 +47,11 @@
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.java7" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.debug.core"/>
       <plugin id="org.eclipse.emf.codegen"/>
@@ -70,6 +68,7 @@
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
       <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
+      <plugin id="org.eclipse.fx.osgi" fragment="true"/>
       <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
       <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
       <plugin id="org.eclipse.jdt.core"/>
@@ -77,8 +76,11 @@
       <plugin id="org.eclipse.jdt.launching"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.osgi.util"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.viatra.addon.querybasedfeatures.runtime"/>
+      <plugin id="org.eclipse.viatra.addon.querybasedfeatures.runtime.validation" fragment="true"/>
       <plugin id="org.eclipse.viatra.examples.cps.deployment"/>
       <plugin id="org.eclipse.viatra.examples.cps.generator"/>
       <plugin id="org.eclipse.viatra.examples.cps.generator.tests"/>
@@ -116,7 +118,9 @@
       <plugin id="org.eclipse.viatra.query.testing.core"/>
       <plugin id="org.eclipse.viatra.query.testing.snapshot"/>
       <plugin id="org.eclipse.viatra.transformation.evm"/>
+      <plugin id="org.eclipse.viatra.transformation.runtime.debug"/>
       <plugin id="org.eclipse.viatra.transformation.runtime.emf"/>
+      <plugin id="org.eclipse.viatra.transformation.runtime.transformationtrace"/>
       <plugin id="org.eclipse.xtend"/>
       <plugin id="org.eclipse.xtend.core"/>
       <plugin id="org.eclipse.xtend.lib"/>
