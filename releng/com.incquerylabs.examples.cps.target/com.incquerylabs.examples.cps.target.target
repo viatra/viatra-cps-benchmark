@@ -4,12 +4,11 @@
   <locations>
   	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
       <unit id="com.google.inject.multibindings" version="3.0.0.v201402270930"/>
-      <unit id="org.eclipse.emf.sdk.feature.group" version="2.11.2.v20160208-0841"/>
-      <unit id="org.eclipse.emf.transaction.feature.group" version="1.9.0.201506010221"/>
-      <unit id="org.eclipse.equinox.sdk.feature.group" version="3.11.2.v20160202-2102"/>
-      <unit id="org.eclipse.gef4.geometry.feature.group" version="0.1.0.201506081138"/>
-      <unit id="org.eclipse.sdk.feature.group" version="4.5.2.v20160212-1500"/>
-      <repository location="http://download.eclipse.org/releases/mars/201602261000"/>
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170504-0807"/>
+      <unit id="org.eclipse.emf.transaction.feature.group" version="1.11.0.201706061339"/>
+      <unit id="org.eclipse.equinox.sdk.feature.group" version="3.13.0.v20170531-1133"/>
+      <unit id="org.eclipse.sdk.feature.group" version="4.7.0.v20170531-2000"/>
+      <repository location="http://download.eclipse.org/releases/oxygen/201706091000"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="org.eclipse.xtext.sdk.feature.group" version="2.10.0.v201605250459"/>
