@@ -25,7 +25,14 @@ mkdir -p $resultPath
 # Copy results to new folder
 cp -R benchmark/results/* $resultPath
 cp benchmark/*.json $resultPath
+
+if [ -e benchmark/build-params.properties ]; then
+  cp benchmark/build-params.properties $resultPath
+fi
+
 mv $resultPath/json/artifact.revision.properties $resultPath
+
+
 
 if [ -z "$commitResults" ]; then
   echo "Skipping commit and push"
