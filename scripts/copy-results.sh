@@ -26,8 +26,8 @@ mkdir -p $resultPath
 cp -R benchmark/results/* $resultPath
 cp benchmark/*.json $resultPath
 
-if [ -e benchmark/build-params.properties ]; then
-  cp benchmark/build-params.properties $resultPath
+if [ -e benchmark/build.params ]; then
+  cp benchmark/build.params $resultPath
 fi
 
 mv $resultPath/json/artifact.revision.properties $resultPath
