@@ -32,7 +32,7 @@ fi
 
 mv $resultPath/json/artifact.revision.properties $resultPath
 
-if [ ( $1 = "ci" ) -o ( -z "$commitResults" ) ]; then
+if [ $1 = "ci" -o -z "$commitResults" ]; then
   echo "Skipping commit and push"
 else
   if [ "$commitResults" = "--push" ]; then
@@ -41,5 +41,7 @@ else
     git add $1/$resultFolder
     git commit -q -m "Add results for $resultFolder with config $1"
     git push origin
+  else
+    echo "commitResults is '$commitResults', not '--push'"
   fi
 fi
