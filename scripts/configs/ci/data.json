@@ -11,9 +11,9 @@
       "generator_types": [
         "TEMPLATE"
       ],
-      "scales": [32,64],
+      "scales": [1,2],
       "timeout": 1000,
-      "runs": 3
+      "runs": 1
     }
   ]
 }
