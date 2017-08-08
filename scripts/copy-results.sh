@@ -34,7 +34,7 @@ mv $resultPath/json/artifact.revision.properties $resultPath
 
 
 
-if [ -z "$commitResults" ]; then
+if [ ( "$1" = "ci" ) -o ( -z "$commitResults" ) ]; then
   echo "Skipping commit and push"
 else
   if [ "$commitResults" = "--push" ]; then
