@@ -12,9 +12,9 @@ cp scripts/run_linux.py benchmark
 cp scripts/convert_results.sh benchmark
 cp ${WORKSPACE}/scripts/configs/${CPS_BENCHMARK}/data.json ${WORKSPACE}/benchmark
 cp ${WORKSPACE}/scripts/configs/${CPS_BENCHMARK}/config.json ${WORKSPACE}/benchmark
-cp ${WORKSPACE}/benchmark/results/json/*.properties ${WORKSPACE}/benchmark
 
 cd benchmark
 python3 -u run_linux.py ${CPS_BENCHMARK}
 chmod +x convert_results.sh
 ./convert_results.sh
+cp ${WORKSPACE}/benchmark/results/json/*.properties ${WORKSPACE}/benchmark
