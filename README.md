@@ -4,9 +4,10 @@ Performance benchmark using the VIATRA CPS demonstrator
 
 [![Build Status](https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/badge/icon)](https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/)
 
-* Benchmark domain: [CPS Demonstrator](https://github.com/viatra/viatra-docs/blob/master/cps/Home.adoc)
-* [Benchmark specification](https://github.com/viatra/viatra-cps-benchmark/wiki/Benchmark-specification)
-* Benchmark results:
+* Domain: [CPS Demonstrator](https://github.com/viatra/viatra-docs/blob/master/cps/Home.adoc)
+* [Specification](https://github.com/viatra/viatra-cps-benchmark/wiki/Benchmark-specification)
+* [Execute](https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/) 
+* Results:
   * [Latest report](https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/lastSuccessfulBuild/artifact/benchmark/cpsBenchmarkReport.html)
   * [Raw data](https://github.com/viatra/viatra-cps-benchmark-results)
 
