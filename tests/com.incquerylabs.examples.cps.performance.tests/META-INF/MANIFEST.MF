@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CPS Demonstrator Performance Tests
 Bundle-SymbolicName: com.incquerylabs.examples.cps.performance.tests;singleton:=true
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: IncQueryLabs Ltd.
 Export-Package: com.incquerylabs.examples.cps.performance.tests,
  com.incquerylabs.examples.cps.performance.tests.config,
@@ -22,9 +22,9 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.viatra.examples.cps.xform.serializer.javaio;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.generator.tests;bundle-version="0.1.0",
  org.eclipse.viatra.examples.cps.xform.m2m.tests;bundle-version="0.1.0",
- org.eclipse.viatra.query.runtime.base.itc;bundle-version="[1.2.0,2.0.0)",
+ org.eclipse.viatra.query.runtime.base.itc;bundle-version="[2.0.0,3.0.0)",
  eu.mondo.sam.bundle;bundle-version="0.1.0",
- org.eclipse.viatra.query.testing.core;bundle-version="1.5.0",
+ org.eclipse.viatra.query.testing.core;bundle-version="2.0.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.9.0",
  org.eclipse.viatra.examples.cps.xform.m2m.launcher;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

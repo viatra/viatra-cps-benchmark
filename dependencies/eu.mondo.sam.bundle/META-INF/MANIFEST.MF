@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: MONDO-SAM OSGI Bundle
 Bundle-SymbolicName: eu.mondo.sam.bundle
 Bundle-Version: 0.1.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: com.google.guava;bundle-version="15.0.0",
  org.codehaus.jackson.core;bundle-version="1.6.0",
  org.codehaus.jackson.mapper;bundle-version="1.6.0"
