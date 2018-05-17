@@ -105,7 +105,6 @@
       <plugin id="org.eclipse.viatra.examples.cps.xform.serializer"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.serializer.eclipse"/>
       <plugin id="org.eclipse.viatra.examples.cps.xform.serializer.javaio"/>
-      <plugin id="org.eclipse.viatra.query.patternlanguage"/>
       <plugin id="org.eclipse.viatra.query.patternlanguage.emf"/>
       <plugin id="org.eclipse.viatra.query.runtime"/>
       <plugin id="org.eclipse.viatra.query.runtime.base"/>
