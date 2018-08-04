@@ -160,6 +160,13 @@
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
 					<version>${xtend.compiler.version}</version>
+					<dependencies>
+                        <dependency>
+                            <groupId>org.eclipse.platform</groupId>
+                            <artifactId>org.eclipse.equinox.common</artifactId>
+                            <version>3.10.0</version>
+                        </dependency>
+                    </dependencies>
 					<configuration>
 						<!-- need to prefix by basedir to generate to currently built module -->
 						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
