@@ -20,8 +20,8 @@
       <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.collections" version="9.0.0.v20170920-0536"/>
-      <repository location="http://download.eclipse.org/collections/9.0.0/repository/"/>
+      <unit id="org.eclipse.collections" version="9.2.0.v20180518-1448"/>
+      <repository location="http://download.eclipse.org/collections/9.2.0/repository/"/>
     </location>
   </locations>
 </target>
