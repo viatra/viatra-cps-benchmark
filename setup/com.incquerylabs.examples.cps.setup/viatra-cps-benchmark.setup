@@ -82,9 +82,6 @@
         name="org.eclipse.xtext.sdk.feature.group"
         versionRange="[2.12.0,3.0.0)"/>
     <requirement
-        name="org.eclipse.viatra.query.tooling.ui.visualization.feature.feature.group"
-        versionRange="[2.0.0,3.0.0)"/>
-    <requirement
         name="com.google.inject.multibindings"
         versionRange="[3.0.0,4.0.0)"/>
     <requirement
