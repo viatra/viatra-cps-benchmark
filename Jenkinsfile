@@ -26,34 +26,34 @@ pipeline {
   stages {
     stage('Build CPS') {
       when {
-        expression { params.SKIP_CPS == 'false' }
+        expression { params.SKIP_CPS != 'false' }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
           sh "./scripts/update.sh"
         }
         configFileProvider([
-            configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenToolchainsConfig1427876196924', variable: 'TOOLCHAIN'),
-            configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
+            configFile(fileId: 'default-maven-toolchains', variable: 'TOOLCHAIN'),
+            configFile(fileId: 'default-maven-settings', variable: 'MAVEN_SETTINGS')]) {
           sh "mvn clean install -f cps-demo/cps/pom.xml -s $MAVEN_SETTINGS -Dviatra.compiler.version=${params.VIATRA_COMPILER_VERSION} -Dviatra.repository.url=${params.VIATRA_REPOSITORY_URL} -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN -DskipTests -P !cps.view.gef5"
         }
       }
     }
     stage('Build Benchmark') {
       when {
-        expression { params.SKIP_BUILD == 'false' }
+        expression { params.SKIP_BUILD != 'false' }
       }
       steps {
         configFileProvider([
-          configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenToolchainsConfig1427876196924', variable: 'TOOLCHAIN'),
-          configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
+          configFile(fileId: 'default-maven-toolchains', variable: 'TOOLCHAIN'),
+          configFile(fileId: 'default-maven-settings', variable: 'MAVEN_SETTINGS')]) {
           sh "mvn clean verify -s $MAVEN_SETTINGS -Dviatra.repository.url=${params.VIATRA_REPOSITORY_URL} -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN"
         }
       }
     }
     stage('Run Benchmark') {
       when {
-        expression { params.SKIP_BENCHMARK == 'false' }
+        expression { params.SKIP_BENCHMARK != 'false' }
       }
       steps {
         sh "./scripts/benchmark.sh ${params.BENCHMARK_CONFIG}"
@@ -61,7 +61,7 @@ pipeline {
     }
     stage('Process results') {
       when {
-        expression { params.SKIP_BENCHMARK == 'false' }
+        expression { params.SKIP_BENCHMARK != 'false' }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
@@ -73,7 +73,7 @@ pipeline {
     }
     stage('Report') {
       when {
-        expression { params.SKIP_BENCHMARK == 'false' }
+        expression { params.SKIP_BENCHMARK != 'false' }
       }
       steps {
         sh "./scripts/report.sh ${params.BENCHMARK_CONFIG}"
