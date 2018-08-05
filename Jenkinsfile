@@ -51,6 +51,16 @@ pipeline {
         }
       }
     }
+    stage('Update MOND-SAM') {
+      when {
+        expression { params.SKIP_BENCHMARK != 'false' }
+      }
+      steps {
+        sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
+          sh "./scripts/dep-mondo-sam.sh"
+        }
+      }
+    } 
     stage('Run Benchmark') {
       when {
         expression { params.SKIP_BENCHMARK != 'false' }
@@ -65,12 +75,11 @@ pipeline {
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
-          sh "./scripts/dep-mondo-sam.sh"
           sh "./scripts/store-params.sh"
           sh "./scripts/copy-results.sh ${params.BENCHMARK_CONFIG} build$BUILD_NUMBER --push"
         }
       }
-    }
+    }   
     stage('Report') {
       when {
         expression { params.SKIP_BENCHMARK != 'false' }
