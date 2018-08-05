@@ -26,7 +26,7 @@ pipeline {
   stages {
     stage('Build CPS') {
       when {
-        expression { params.SKIP_CPS != 'false' }
+        expression { params.SKIP_CPS != true }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
@@ -41,7 +41,7 @@ pipeline {
     }
     stage('Build Benchmark') {
       when {
-        expression { params.SKIP_BUILD != 'false' }
+        expression { params.SKIP_BUILD != true }
       }
       steps {
         configFileProvider([
@@ -53,7 +53,7 @@ pipeline {
     }
     stage('Update MOND-SAM') {
       when {
-        expression { params.SKIP_BENCHMARK != 'false' }
+        expression { params.SKIP_BENCHMARK != true }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
@@ -63,7 +63,7 @@ pipeline {
     } 
     stage('Run Benchmark') {
       when {
-        expression { params.SKIP_BENCHMARK != 'false' }
+        expression { params.SKIP_BENCHMARK != true }
       }
       steps {
         sh "./scripts/benchmark.sh ${params.BENCHMARK_CONFIG}"
@@ -71,7 +71,7 @@ pipeline {
     }
     stage('Process results') {
       when {
-        expression { params.SKIP_BENCHMARK != 'false' }
+        expression { params.SKIP_BENCHMARK != true }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
@@ -82,7 +82,7 @@ pipeline {
     }   
     stage('Report') {
       when {
-        expression { params.SKIP_BENCHMARK != 'false' }
+        expression { params.SKIP_BENCHMARK != true }
       }
       steps {
         sh "./scripts/report.sh ${params.BENCHMARK_CONFIG}"
