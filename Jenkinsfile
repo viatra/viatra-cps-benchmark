@@ -26,7 +26,7 @@ pipeline {
   stages {
     stage('Build CPS') {
       when {
-        environment name: 'SKIP_CPS', value: 'false'
+        expression { params.SKIP_CPS == 'false' }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
@@ -35,48 +35,48 @@ pipeline {
         configFileProvider([
             configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenToolchainsConfig1427876196924', variable: 'TOOLCHAIN'),
             configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
-          sh "mvn clean install -f cps-demo/cps/pom.xml -s $MAVEN_SETTINGS -Dviatra.compiler.version=$VIATRA_COMPILER_VERSION -Dviatra.repository.url=$VIATRA_REPOSITORY_URL -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN -DskipTests -P !cps.view.gef5"
+          sh "mvn clean install -f cps-demo/cps/pom.xml -s $MAVEN_SETTINGS -Dviatra.compiler.version=${params.VIATRA_COMPILER_VERSION} -Dviatra.repository.url=${params.VIATRA_REPOSITORY_URL} -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN -DskipTests -P !cps.view.gef5"
         }
       }
     }
     stage('Build Benchmark') {
       when {
-        environment name: 'SKIP_BUILD', value: 'false'
+        expression { params.SKIP_BUILD == 'false' }
       }
       steps {
         configFileProvider([
           configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenToolchainsConfig1427876196924', variable: 'TOOLCHAIN'),
           configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
-          sh "mvn clean verify -s $MAVEN_SETTINGS -Dviatra.repository.url=$VIATRA_REPOSITORY_URL -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN"
+          sh "mvn clean verify -s $MAVEN_SETTINGS -Dviatra.repository.url=${params.VIATRA_REPOSITORY_URL} -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN"
         }
       }
     }
     stage('Run Benchmark') {
       when {
-        environment name: 'SKIP_BENCHMARK', value: 'false'
+        expression { params.SKIP_BENCHMARK == 'false' }
       }
       steps {
-        sh "./scripts/benchmark.sh $BENCHMARK_CONFIG"
+        sh "./scripts/benchmark.sh ${params.BENCHMARK_CONFIG}"
       }
     }
     stage('Process results') {
       when {
-        environment name: 'SKIP_BENCHMARK', value: 'false'
+        expression { params.SKIP_BENCHMARK == 'false' }
       }
       steps {
         sshagent(['24f0908d-7662-4e93-80cc-1143b7f92ff1']) {
           sh "./scripts/dep-mondo-sam.sh"
           sh "./scripts/store-params.sh"
-          sh "./scripts/copy-results.sh $BENCHMARK_CONFIG build$BUILD_NUMBER --push"
+          sh "./scripts/copy-results.sh ${params.BENCHMARK_CONFIG} build$BUILD_NUMBER --push"
         }
       }
     }
     stage('Report') {
       when {
-        environment name: 'SKIP_BENCHMARK', value: 'false'
+        expression { params.SKIP_BENCHMARK == 'false' }
       }
       steps {
-        sh "./scripts/report.sh $BENCHMARK_CONFIG"
+        sh "./scripts/report.sh ${params.BENCHMARK_CONFIG}"
       }
     }
   }
@@ -89,7 +89,7 @@ pipeline {
     success {
       slackSend channel: "viatra-notifications",
         color: "good",
-        message: "Config: $BENCHMARK_CONFIG, VIATRA <$VIATRA_REPOSITORY_URL|repository> with $VIATRA_COMPILER_VERSION compiler.\nDescription: $BENCHMARK_DESCRIPTION\n <https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/$BUILD_NUMBER/artifact/benchmark/cpsBenchmarkReport.html|View results>",
+        message: "Config: ${params.BENCHMARK_CONFIG}, VIATRA <${params.VIATRA_REPOSITORY_URL}|repository> with ${params.VIATRA_COMPILER_VERSION} compiler.\nDescription: ${params.BENCHMARK_DESCRIPTION}\n <https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/$BUILD_NUMBER/artifact/benchmark/cpsBenchmarkReport.html|View results>",
         teamDomain: "incquerylabs",
         tokenCredentialId: "6ff98023-8c20-4d9c-821a-b769b0ea0fad"
     }
