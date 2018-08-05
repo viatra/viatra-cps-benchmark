@@ -5,7 +5,7 @@ pipeline {
   }
 
   parameters {
-    booleanParam(defaultValue: false, description: 'Set to true if you don\'t want to run the CPS build.', name: 'SKIP_CPS')
+    booleanParam(defaultValue: true, description: 'Set to true if you don\'t want to run the CPS build.', name: 'SKIP_CPS')
     booleanParam(defaultValue: false, description: 'Set to true if you don\'t want to run the benchmark build', name: 'SKIP_BUILD')
     booleanParam(defaultValue: false, description: 'Set to true if you don\'t want to run the benchmark', name: 'SKIP_BENCHMARK')
     string(defaultValue: '2.1.0-SNAPSHOT', description: '', name: 'VIATRA_COMPILER_VERSION')
