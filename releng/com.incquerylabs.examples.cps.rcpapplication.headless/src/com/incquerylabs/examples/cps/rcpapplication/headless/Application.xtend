@@ -35,6 +35,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import static eu.mondo.sam.core.metrics.MemoryMetric.*
 import org.eclipse.emf.common.util.URI
 import org.apache.log4j.ConsoleAppender
+import m2m.batch.cps2dep.yamtl.tests.BatchYAMTL
 
 /** 
  * This class controls all aspects of the application's execution
@@ -125,7 +126,7 @@ class Application implements IApplication {
 		}
 		
 		// TODO move scenario specific argument parsing to ScenarioFactory!
-		val trafoType = TransformationType.valueOf(params.get(TRANSFORMATION_TYPE_ARGUMENT))
+		val trafo = params.get(TRANSFORMATION_TYPE_ARGUMENT)
 		val scale = Integer.parseInt(params.get(SCALE_ARGUMENT))
 		val generatorType = GeneratorType.valueOf(params.get(GENERATOR_TYPE_ARGUMENT))
 		val runIndex = Integer.parseInt(params.get(RUN_INDEX_ARGUMENT))
@@ -137,11 +138,11 @@ class Application implements IApplication {
 		val scenarioId = ScenarioIdentifier.valueOf(params.get(SCENARIO_ARGUMENT))
 
 		val bcase = CaseFactory.create.createCase(caseId, scale, random)
-		val tool = trafoType.name + "-" + generatorType.name
+		val tool = trafo + "-" + generatorType.name
 		val scenario = ScenarioFactory.create.createScenario(scenarioId, bcase, runIndex, tool)
 		
 		val resultsFolderPath = params.get(RESULTS_ARGUMENT)
-		val arguments = new BenchmarkArguments(scenario, trafoType, generatorType, scale, resultsFolderPath, consoleLog)
+		val arguments = new BenchmarkArguments(scenario, trafo, generatorType, scale, resultsFolderPath, consoleLog)
 		
 		initLogger(arguments)
 		
@@ -230,7 +231,11 @@ class Application implements IApplication {
 		token.seed = RANDOM_SEED
 		token.size = arguments.scale
 		// TODO xform and generator scenario specific!
-		token.xform = arguments.transformationType.wrapper
+		if (arguments.transformationType == "BATCH_YAMTL") {
+		    token.xform = new BatchYAMTL
+		} else {
+    		token.xform = TransformationType.valueOf(arguments.transformationType).wrapper
+		}
 		token.generatorType = arguments.generatorType
 		
 		val engine = new BenchmarkEngine
@@ -271,7 +276,7 @@ class Application implements IApplication {
 class BenchmarkArguments {
 	
 	CPSBenchmarkScenario scenario
-	TransformationType transformationType
+	String transformationType
 	GeneratorType generatorType
 	int scale
 	String resultsFolderPath
