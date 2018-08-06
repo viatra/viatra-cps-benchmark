@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Batch YAMTL M2M transformation tests
 Bundle-SymbolicName: m2m.batch.cps2dep.yamtl.tests;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: IncQuery Labs Ltd.
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.viatra.examples.cps.model,

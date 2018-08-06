@@ -7,7 +7,7 @@ import org.eclipse.viatra.examples.cps.xform.m2m.launcher.CPSTransformationWrapp
 import org.eclipse.xtend.lib.annotations.Accessors
 
 class BatchYAMTL extends CPSTransformationWrapper {
-	protected extension Logger logger = Logger.getLogger("Cps2DepTestDriver_YAMTL")
+	protected extension Logger logger = Logger.getLogger(this.class)
 	
 	@Accessors
 	var Cps2DepYAMTL xform 
