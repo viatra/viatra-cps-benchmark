@@ -14,6 +14,15 @@ pipeline {
     text(defaultValue: 'Measure performance of latest master build', description: 'You may add information on why this benchmark is relevant and include URLs (e.g. Gerrit change including patch version) to ease historical analyis of results.', name: 'BENCHMARK_DESCRIPTION')
   }
 
+  options {
+    // Keep only the last 15 builds
+    buildDiscarder(logRotator(numToKeepStr: '15'))
+    // Do not execute the same pipeline concurrently
+    disableConcurrentBuilds()
+    // Display timestamps in log
+    timestamps()
+  }
+
   tools {
     maven 'Maven 3.5'
     jdk 'Oracle JDK 8'
