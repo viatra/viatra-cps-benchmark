@@ -48,7 +48,6 @@ pipeline {
           configFile(fileId: 'default-maven-toolchains', variable: 'TOOLCHAIN'),
           configFile(fileId: 'default-maven-settings', variable: 'MAVEN_SETTINGS')]) {
           
-          sh "mvn dependency:tree -f tests/m2m.batch.cps2dep.yamtl.tests/pom.xml -X -s $MAVEN_SETTINGS -Dviatra.repository.url=${params.VIATRA_REPOSITORY_URL} -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN"
           sh "mvn clean verify -X -s $MAVEN_SETTINGS -Dviatra.repository.url=${params.VIATRA_REPOSITORY_URL} -Dcps.test.vmargs='-Dgit.clone.location=$WORKSPACE/cps-demo/cps' -Dmaven.repo.local=$WORKSPACE/.repository -B -t $TOOLCHAIN"
         }
       }
