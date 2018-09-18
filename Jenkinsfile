@@ -107,7 +107,7 @@ pipeline {
     success {
       slackSend channel: "viatra-notifications",
         color: "good",
-        message: "Config: ${params.BENCHMARK_CONFIG}, VIATRA <${params.VIATRA_REPOSITORY_URL}|repository> with ${params.VIATRA_COMPILER_VERSION} compiler.\nDescription: ${params.BENCHMARK_DESCRIPTION}\n <https://build.incquerylabs.com/jenkins/job/viatra-cps-benchmark/$BUILD_NUMBER/artifact/benchmark/cpsBenchmarkReport.html|View results>",
+        message: "Config: ${params.BENCHMARK_CONFIG}, VIATRA <${params.VIATRA_REPOSITORY_URL}|repository> with ${params.VIATRA_COMPILER_VERSION} compiler.\nDescription: ${params.BENCHMARK_DESCRIPTION}\n (<${BUILD_URL}artifact/benchmark/cpsBenchmarkReport.html|View Report>, <$BUILD_URL|Open Build>)",
         teamDomain: "incquerylabs",
         tokenCredentialId: "6ff98023-8c20-4d9c-821a-b769b0ea0fad"
     }
