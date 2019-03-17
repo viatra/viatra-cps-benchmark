@@ -8,7 +8,7 @@ pipeline {
     booleanParam(defaultValue: false, description: 'Set to true if you don\'t want to run the CPS build.', name: 'SKIP_CPS')
     booleanParam(defaultValue: false, description: 'Set to true if you don\'t want to run the benchmark build', name: 'SKIP_BUILD')
     booleanParam(defaultValue: false, description: 'Set to true if you don\'t want to run the benchmark', name: 'SKIP_BENCHMARK')
-    string(defaultValue: '2.1.0-SNAPSHOT', description: '', name: 'VIATRA_COMPILER_VERSION')
+    string(defaultValue: '2.2.0-SNAPSHOT', description: '', name: 'VIATRA_COMPILER_VERSION')
     string(defaultValue: 'https://build.incquerylabs.com/jenkins/job/VIATRA2-EMF-Core/lastSuccessfulBuild/artifact/releng/org.eclipse.viatra.update/target/repository/', description: 'VIATRA Update site with the benchmarked version.', name: 'VIATRA_REPOSITORY_URL')
     choice(choices: 'ci\nm2m-reduced\nm2m-lowsynch\nm2m\ntoolchain', description: 'Select the benchmark configuration to run (scenarios, cases, tools, etc.)', name: 'BENCHMARK_CONFIG')
     text(defaultValue: 'Measure performance of latest master build', description: 'You may add information on why this benchmark is relevant and include URLs (e.g. Gerrit change including patch version) to ease historical analyis of results.', name: 'BENCHMARK_DESCRIPTION')
