@@ -25,7 +25,7 @@ pipeline {
 
   tools {
     maven 'Maven 3.5'
-    jdk 'Oracle JDK 8'
+    jdk 'OpenJDK 8'
   }
 
   environment {
